@@ -6,4 +6,10 @@ public class LoginResponse {
     public static final String ERROR_VALIDATION = "Ошибка валидации";
     public static final String ERROR_EMAIL_OR_PHONE_REQUIRED = "Требуется указать телефон или email";
     public static final String ERROR_PASSWORD_REQUIRED = "Требуется указать пароль";
+    public static final String ERROR_EMAIL_REQUIRED = "Требуется указать email";
+    public static final String ERROR_PHONE_REQUIRED = "Требуется указать телефон";
+    public static final String ERROR_ENTER_CORRECT_PHONE = "Укажите корректный номер телефона";
+    public static final String ERROR_ENTER_CORRECT_EMAIL = "Укажите корректный email";
+    public static final String ERROR_FUNCTIONALITY_UNAVAILABLE = "Функционал недоступен. Пожалуйста, обновите приложение";
+
 }

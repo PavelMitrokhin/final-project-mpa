@@ -2,6 +2,8 @@ package by.fixprice.api;
 
 import by.fixprice.api.requests.LoginRequest;
 import by.fixprice.api.responses.LoginResponse;
+import by.fixprice.utils.ApiConstant;
+import by.fixprice.utils.GenerationDataUtil;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.*;
 
@@ -9,7 +11,12 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
 
 public class LoginTest {
+
     @BeforeEach
+    public void setUp() {
+        LoginRequest.initRequestSpecification();
+    }
+
     public void waitBeforeTest() {
         try {
             Thread.sleep(2500);
@@ -22,10 +29,10 @@ public class LoginTest {
     @DisplayName("Null credentials: email, phone and password")
     public void nullCredentialsTest() {
         given()
-                .body(LoginRequest.BODY_NULL_ALL)
-                .headers(LoginRequest.getHeaders())
+                .spec(LoginRequest.requestSpecification)
+                .body(LoginRequest.getBodyAllNulls())
                 .when()
-                .post(LoginRequest.LOGIN_URL)
+                .post()
                 .then()
                 .statusCode(400)
                 .log().all()
@@ -37,10 +44,10 @@ public class LoginTest {
     @DisplayName("Empty (\"\") credentials: email, phone and password")
     public void emptyCredentialsTest() {
         given()
-                .body(LoginRequest.BODY_EMPTY_ALL)
-                .headers(LoginRequest.getHeaders())
+                .spec(LoginRequest.requestSpecification)
+                .body(LoginRequest.getBody("", "", ""))
                 .when()
-                .post(LoginRequest.LOGIN_URL)
+                .post()
                 .then()
                 .statusCode(400)
                 .log().all()
@@ -52,103 +59,111 @@ public class LoginTest {
     @DisplayName("Empty email")
     public void emptyEmailTest() {
         given()
-                .body("{\"password\":\"\",\"email\":\"\",\"phone\":null}")
-                .headers(LoginRequest.getHeaders())
+                .spec(LoginRequest.requestSpecification)
+                .body(LoginRequest.getBodyPhoneNull("", ""))
                 .when()
-                .post(LoginRequest.LOGIN_URL)
+                .post()
                 .then()
                 .statusCode(400)
                 .log().all()
                 .body("message", equalTo(LoginResponse.ERROR_VALIDATION))
-                .body("extra.email[0]", equalTo("Требуется указать email"));
+                .body("extra.email[0]", equalTo(LoginResponse.ERROR_EMAIL_REQUIRED));
     }
 
     @Test
     @DisplayName("Empty phone")
     public void emptyPhoneTest() {
         given()
-                .body("{\"password\":\"\",\"email\":null,\"phone\":\"\"}")
-                .headers(LoginRequest.getHeaders())
+                .spec(LoginRequest.requestSpecification)
+                .body(LoginRequest.getBodyEmailNull("", ""))
                 .when()
-                .post(LoginRequest.LOGIN_URL)
+                .post()
                 .then()
                 .statusCode(400)
                 .log().all()
                 .body("message", equalTo(LoginResponse.ERROR_VALIDATION))
-                .body("extra.phone[0]", equalTo("Требуется указать телефон"));
+                .body("extra.phone[0]", equalTo(LoginResponse.ERROR_PHONE_REQUIRED));
     }
 
     @Test
     @DisplayName("Empty password + phone")
     public void emptyPasswordTest() {
-        String randomPhone = LoginRequest.getRandomPhone();
+        String randomPhone = GenerationDataUtil.generateBelarusMobilePhone();
         given()
+                .spec(LoginRequest.requestSpecification)
+                .body(LoginRequest.getBodyEmailNull("", randomPhone))
                 .body("{\"password\":\"\",\"email\":null,\"phone\":\"" + randomPhone + "\"}")
-                .headers(LoginRequest.getHeaders())
                 .when()
-                .post(LoginRequest.LOGIN_URL)
+                .post()
                 .then()
                 .statusCode(400)
                 .log().all()
                 .body("message", equalTo(LoginResponse.ERROR_VALIDATION))
-                .body("extra.password[0]", equalTo("Требуется указать пароль"));
+                .body("extra.password[0]", equalTo(LoginResponse.ERROR_PASSWORD_REQUIRED));
     }
 
     @Test
     @DisplayName("Email only (+ null password)")
     public void emailOnlyTest() {
-        String randomEmail = LoginRequest.getRandomEmail();
+        String randomEmail = GenerationDataUtil.generateEmail();
+        String phone = null;
         given()
-                .body("{\"password\":null,\"email\":\"" + randomEmail + "\",\"phone\":null}")
-                .headers(LoginRequest.getHeaders())
+                .spec(LoginRequest.requestSpecification)
+                .body(LoginRequest.getBodyPasswordNull(randomEmail, phone))
                 .when()
-                .post(LoginRequest.LOGIN_URL)
+                .post()
                 .then()
                 .statusCode(400)
                 .log().all()
                 .body("message", equalTo(LoginResponse.ERROR_VALIDATION))
-                .body("extra.password[0]", equalTo("Требуется указать пароль"));
+                .body("extra.password[0]", equalTo(LoginResponse.ERROR_PASSWORD_REQUIRED));
     }
 
     @Test
     @DisplayName("Incorrect email")
     public void incorrectEmailTest() {
+        String randomPassword = GenerationDataUtil.generatePassword();
+        String incorrectEmail = GenerationDataUtil.generateIncorrectLogin();
         given()
-                .body("{\"password\":\"johnsonsbaby24/7\",\"email\":\"sushihryushi\",\"phone\":null}")
-                .headers(LoginRequest.getHeaders())
+                .spec(LoginRequest.requestSpecification)
+                .body(LoginRequest.getBodyPhoneNull(randomPassword, incorrectEmail))
                 .when()
-                .post(LoginRequest.LOGIN_URL)
+                .post()
                 .then()
                 .statusCode(400)
                 .log().all()
                 .body("message", equalTo(LoginResponse.ERROR_VALIDATION))
-                .body("extra.email[0]", equalTo("Укажите корректный email"));
+                .body("extra.email[0]", equalTo(LoginResponse.ERROR_ENTER_CORRECT_EMAIL));
+        ;
     }
 
     @Test
     @DisplayName("Incorrect phone")
     public void incorrectPhoneTest() {
+        String randomPassword = GenerationDataUtil.generatePassword();
+        String incorrectPhone = GenerationDataUtil.generateIncorrectLogin();
         given()
-                .body("{\"password\":\"johnsonsbaby24/7\",\"email\":null,\"phone\":\"sushihryushi@banan.kek\"}")
-                .headers(LoginRequest.getHeaders())
+                .spec(LoginRequest.requestSpecification)
+                .body(LoginRequest.getBodyEmailNull(randomPassword, incorrectPhone))
                 .when()
-                .post(LoginRequest.LOGIN_URL)
+                .post()
                 .then()
                 .statusCode(400)
                 .log().all()
                 .body("message", equalTo(LoginResponse.ERROR_VALIDATION))
-                .body("extra.phone[0]", equalTo("Укажите корректный номер телефона"));
+                .body("extra.phone[0]", equalTo(LoginResponse.ERROR_ENTER_CORRECT_PHONE));
     }
 
     @Test
     @DisplayName("Invalid phone + invalid password")
     public void invalidPhoneAndPasswordTest() {
-        String randomPhone = LoginRequest.getRandomPhone();
+        String randomPassword = GenerationDataUtil.generatePassword();
+        String randomPhone = GenerationDataUtil.generateBelarusMobilePhone();
         given()
-                .body("{\"password\":\"johnsonsbaby24/7\",\"email\":null,\"phone\":\"" + randomPhone + "\"}")
-                .headers(LoginRequest.getHeaders())
+                .spec(LoginRequest.requestSpecification)
+                .body(LoginRequest.getBodyEmailNull(randomPassword, randomPhone))
                 .when()
-                .post(LoginRequest.LOGIN_URL)
+                .post()
                 .then()
                 .statusCode(400)
                 .log().all()
@@ -158,12 +173,13 @@ public class LoginTest {
     @Test
     @DisplayName("Invalid email + invalid password")
     public void invalidEmailAndPasswordTest() {
-        String randomEmail = LoginRequest.getRandomEmail();
+        String randomPassword = GenerationDataUtil.generatePassword();
+        String randomEmail = GenerationDataUtil.generateEmail();
         given()
-                .body("{\"password\":\"johnsonsbaby24/7\",\"email\":\"" + randomEmail + "\",\"phone\":null}")
-                .headers(LoginRequest.getHeaders())
+                .spec(LoginRequest.requestSpecification)
+                .body(LoginRequest.getBodyPhoneNull(randomPassword, randomEmail))
                 .when()
-                .post(LoginRequest.LOGIN_URL)
+                .post()
                 .then()
                 .statusCode(400)
                 .log().all()
@@ -173,13 +189,14 @@ public class LoginTest {
     @Test
     @DisplayName("Email + phone + password")
     public void sendEmailAndPhoneAndPasswordTest() {
-        String randomEmail = LoginRequest.getRandomEmail();
-        String randomPhone = LoginRequest.getRandomPhone();
+        String randomPassword = GenerationDataUtil.generatePassword();
+        String randomEmail = GenerationDataUtil.generateEmail();
+        String randomPhone = GenerationDataUtil.generateBelarusMobilePhone();
         given()
-                .body("{\"password\":\"johnsonsbaby24/7\",\"email\":\"" + randomEmail + "\",\"phone\":\"" + randomPhone + "\"}")
-                .headers(LoginRequest.getHeaders())
+                .spec(LoginRequest.requestSpecification)
+                .body(LoginRequest.getBody(randomPassword, randomEmail, randomPhone))
                 .when()
-                .post(LoginRequest.LOGIN_URL)
+                .post()
                 .then()
                 .statusCode(400)
                 .log().all()
@@ -189,25 +206,29 @@ public class LoginTest {
     @Test
     @DisplayName("No headers")
     public void noHeadersTest() {
+        String randomEmail = GenerationDataUtil.generateEmail();
+        String phone = null;
         given()
-                .body("{\"password\":null,\"email\":\"sushihryushi@banan.kek\",\"phone\":null}")
+                .body(LoginRequest.getBodyPasswordNull(randomEmail, phone))
                 .when()
-                .post(LoginRequest.LOGIN_URL)
+                .post(ApiConstant.LOGIN_URL)
                 .then()
                 .statusCode(400)
                 .log().all()
-                .body("message", equalTo("Функционал недоступен. Пожалуйста, обновите приложение"));
+                .body("message", equalTo(LoginResponse.ERROR_FUNCTIONALITY_UNAVAILABLE));
     }
 
     @Test
     @DisplayName("No header x-key")
     public void noHeaderXKeyTest() {
+        String randomEmail = GenerationDataUtil.generateEmail();
+        String phone = null;
         given()
-                .body("{\"password\":null,\"email\":\"sushihryushi@banan.kek\",\"phone\":null}")
+                .body(LoginRequest.getBodyPasswordNull(randomEmail, phone))
                 .header("x-city", "14")
                 .contentType("application/json")
                 .when()
-                .post(LoginRequest.LOGIN_URL)
+                .post(ApiConstant.LOGIN_URL)
                 .then()
                 .statusCode(400)
                 .log().all()
@@ -217,46 +238,50 @@ public class LoginTest {
     @Test
     @DisplayName("No header x-city")
     public void noHeaderXCityTest() {
+        String randomEmail = GenerationDataUtil.generateEmail();
+        String phone = null;
         given()
-                .body("{\"password\":null,\"email\":\"sushihryushi@banan.kek\",\"phone\":null}")
+                .body(LoginRequest.getBodyPasswordNull(randomEmail, phone))
                 .header("x-key", "740e56af4c394537d535819f54ba29cc")
                 .contentType("application/json")
                 .when()
-                .post(LoginRequest.LOGIN_URL)
+                .post(ApiConstant.LOGIN_URL)
                 .then()
                 .statusCode(400)
                 .log().all()
-                .body("message", equalTo("Функционал недоступен. Пожалуйста, обновите приложение"));
+                .body("message", equalTo(LoginResponse.ERROR_FUNCTIONALITY_UNAVAILABLE));
     }
 
     @Test
     @DisplayName("No header contentType")
     public void noHeaderContentTypeTest() {
+        String email = GenerationDataUtil.generateEmail();
+        String phone = GenerationDataUtil.generateBelarusMobilePhone();
         given()
-                .body("{\"password\":\"\",\"email\":\"sushihryushi@banan.kek\",\"phone\":\"+375298888888\"}")
-                .header("x-key", "65bffe42769ff379b3a7a953e0561fb2")
-                .header("x-city", "14")
+                .body(LoginRequest.getBody("", email, phone))
+                .headers(LoginRequest.getAllHeaders())
                 .when()
-                .post(LoginRequest.LOGIN_URL)
+                .post(ApiConstant.LOGIN_URL)
                 .then()
                 .statusCode(400)
                 .log().all()
                 .body("message", equalTo(LoginResponse.ERROR_VALIDATION))
-                .body("extra.phone[0]", equalTo("Требуется указать телефон или email"));
+                .body("extra.phone[0]", equalTo(LoginResponse.ERROR_EMAIL_OR_PHONE_REQUIRED));
     }
 
     @Test
     @DisplayName("Too many requests")
     public void tooManyRequestsTest() {
         boolean hasTooManyRequestsResponse = false;
-        String randomPhone = LoginRequest.getRandomPhone();
+        String randomPassword = GenerationDataUtil.generatePassword();
+        String randomPhone = GenerationDataUtil.generateBelarusMobilePhone();
 
         while (!hasTooManyRequestsResponse) {
             Response response = given()
-                    .body("{\"password\":\"johnsonsbaby24/7\",\"email\":null,\"phone\":\"" + randomPhone + "\"}")
-                    .headers(LoginRequest.getHeaders())
+                    .spec(LoginRequest.requestSpecification)
+                    .body(LoginRequest.getBodyEmailNull(randomPassword, randomPhone))
                     .when()
-                    .post(LoginRequest.LOGIN_URL);
+                    .post();
 
             if (response.statusCode() == 400) {
                 String message = response.then().extract().path("message");
@@ -273,14 +298,15 @@ public class LoginTest {
     @DisplayName(" more 5 tempts failed")
     public void sendFiveTriesTest() {
         boolean hasFiveRequestsResponse = false;
-        String randomEmail = LoginRequest.getRandomEmail();
+        String randomPassword = GenerationDataUtil.generatePassword();
+        String randomEmail = GenerationDataUtil.generateEmail();
 
         for (int i = 1; i < 6; i++) {
             Response response = given()
-                    .body("{\"password\":\"johnsonsbaby24/7\",\"email\":\"" + randomEmail + "\",\"phone\":null}")
-                    .headers(LoginRequest.getHeaders())
+                    .spec(LoginRequest.requestSpecification)
+                    .body(LoginRequest.getBodyPhoneNull(randomPassword, randomEmail))
                     .when()
-                    .post(LoginRequest.LOGIN_URL);
+                    .post();
 
             if (response.statusCode() == 400) {
                 String message = response.then().extract().path("message");
