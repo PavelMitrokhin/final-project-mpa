@@ -17,14 +17,6 @@ public class LoginTest {
         LoginRequest.initRequestSpecification();
     }
 
-    public void waitBeforeTest() {
-        try {
-            Thread.sleep(2500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-
     @Test
     @DisplayName("Null credentials: email, phone and password")
     public void nullCredentialsTest() {
