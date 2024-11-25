@@ -71,9 +71,4 @@ public class LoginRequest {
                 + RandomStringUtils.random(3, numbers)
                 + gmailDomain;
     }
-
-    public static String getRandomPhone() {
-        String phoneNumber = "+37529" + RandomStringUtils.randomNumeric(7);
-        return phoneNumber;
-    }
 }
