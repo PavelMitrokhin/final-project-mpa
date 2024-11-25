@@ -18,11 +18,10 @@ public class GenerationDataUtil {
 
     public static String generateBelarusMobilePhone(){
         Random random = new Random();
-        String countryCode = "+375";
         int[] mobileCodesBelarus = {25, 29, 33, 44};
-        int mobileCodeBelarus = random.nextInt(mobileCodesBelarus.length);
-        int number = 1000000 + random.nextInt(9000000);
-        return String.format("%s-%s-%s", countryCode, mobileCodeBelarus, number);
+        int randomIndex = random.nextInt(mobileCodesBelarus.length);
+        int mobileCodeBelarus = mobileCodesBelarus[randomIndex];
+        return String.format(mobileCodeBelarus + RandomStringUtils.randomNumeric(7));
     }
 
     public static String generateIncorrectLogin(){
