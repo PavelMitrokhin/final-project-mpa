@@ -6,4 +6,7 @@ public class LoginResponse {
     public static final String ERROR_VALIDATION = "Ошибка валидации";
     public static final String ERROR_EMAIL_OR_PHONE_REQUIRED = "Требуется указать телефон или email";
     public static final String ERROR_PASSWORD_REQUIRED = "Требуется указать пароль";
+    public static final String ERROR_EMAIL_REQUIRED = "Требуется указать email";
+    public static final String ERROR_PHONE_REQUIRED = "Требуется указать телефон";
+
 }
