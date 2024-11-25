@@ -25,7 +25,7 @@ public class GenerationDataUtil {
         return String.format("%s-%s-%s", countryCode, mobileCodeBelarus, number);
     }
 
-    public static String generateIncorrectEmail(){
+    public static String generateIncorrectLogin(){
         return RandomStringUtils.randomAscii(4,14);
     }
 }
