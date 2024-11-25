@@ -8,5 +8,7 @@ public class LoginResponse {
     public static final String ERROR_PASSWORD_REQUIRED = "Требуется указать пароль";
     public static final String ERROR_EMAIL_REQUIRED = "Требуется указать email";
     public static final String ERROR_PHONE_REQUIRED = "Требуется указать телефон";
+    public static final String ERROR_ENTER_CORRECT_PHONE = "Укажите корректный номер телефона";
+    public static final String ERROR_ENTER_CORRECT_EMAIL = "Укажите корректный email";
 
 }
