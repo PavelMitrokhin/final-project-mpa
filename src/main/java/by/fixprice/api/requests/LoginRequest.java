@@ -47,7 +47,13 @@ public class LoginRequest {
                 "}";
     }
 
-//    public static String getBodyPasswordNull(String password, String phone) {}
+    public static String getBodyPasswordNull(String email, String phone) {
+        return "{\n" +
+                "    \"password\": null,\n" +
+                "    \"email\": \"" + email + "\",\n" +
+                "    \"phone\": \"" + phone + "\"\n" +
+                "}";
+    }
 
     public static String getBodyAllNulls() {
         return "{\n" +
