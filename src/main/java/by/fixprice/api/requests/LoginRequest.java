@@ -59,13 +59,4 @@ public class LoginRequest {
                 "    \"phone\": null\n" +
                 "}";
     }
-
-    public static String getRandomEmail() {
-        String lowerCase = "abcdefghijklmnopqrstuvwxyz";
-        String upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        return RandomStringUtils.random(5, lowerCase)
-                + RandomStringUtils.random(2, upperCase)
-                + RandomStringUtils.random(3, numbers)
-                + gmailDomain;
-    }
 }
