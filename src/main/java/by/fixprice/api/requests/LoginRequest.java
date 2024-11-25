@@ -1,16 +1,13 @@
 package by.fixprice.api.requests;
 
 import io.restassured.builder.RequestSpecBuilder;
-import io.restassured.internal.RequestSpecificationImpl;
 import io.restassured.specification.RequestSpecification;
 import org.apache.commons.lang3.RandomStringUtils;
-import org.openqa.selenium.devtools.v85.network.model.Request;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class LoginRequest {
     public static RequestSpecification requestSpecification;
+    private static String numbers = "0123456789";
+    private static String gmailDomain = "@gmail.com";
 
     public static void initRequestSpecification() {
         requestSpecification = new RequestSpecBuilder()
@@ -62,12 +59,6 @@ public class LoginRequest {
                 "    \"phone\": null\n" +
                 "}";
     }
-
-
-
-    private static String numbers = "0123456789";
-    private static String gmailDomain = "@gmail.com";
-
 
     public static String getRandomEmail() {
         String lowerCase = "abcdefghijklmnopqrstuvwxyz";
