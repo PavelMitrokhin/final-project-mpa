@@ -1,6 +1,7 @@
 package by.fixprice.utils;
 
 import com.github.javafaker.Faker;
+import org.apache.commons.lang3.RandomStringUtils;
 
 import java.util.Random;
 
@@ -22,5 +23,9 @@ public class GenerationDataUtil {
         int mobileCodeBelarus = random.nextInt(mobileCodesBelarus.length);
         int number = 1000000 + random.nextInt(9000000);
         return String.format("%s-%s-%s", countryCode, mobileCodeBelarus, number);
+    }
+
+    public static String generateIncorrectEmail(){
+        return RandomStringUtils.randomAscii(4,14);
     }
 }
