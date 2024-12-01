@@ -12,11 +12,11 @@ public class ApiUser {
 
         if (email != null) {
             this.email = "\"" + email + "\"";
-        } else this.password = null;
+        } else this.email = null;
 
         if (phone != null) {
             this.phone = "\"" + phone + "\"";
-        } else this.password = null;
+        } else this.phone = null;
     }
 
     public String getPassword() {
