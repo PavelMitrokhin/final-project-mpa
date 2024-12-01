@@ -1,4 +1,4 @@
-package by.fixprice.utils;
+package by.fixprice.utils.api;
 
 public class ApiUser {
     private String password;

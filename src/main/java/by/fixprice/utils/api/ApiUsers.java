@@ -1,4 +1,6 @@
-package by.fixprice.utils;
+package by.fixprice.utils.api;
+
+import by.fixprice.utils.GenerationDataUtil;
 
 public class ApiUsers {
     public String randomPassword = GenerationDataUtil.generatePassword();
