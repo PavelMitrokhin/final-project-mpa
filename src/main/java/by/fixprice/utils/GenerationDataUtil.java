@@ -13,7 +13,7 @@ public class GenerationDataUtil {
     }
 
     public static String generatePassword() {
-        return faker.internet().password();
+        return faker.internet().password(8,20, true, true);
     }
 
     public static String generateBelarusMobilePhone() {
@@ -23,9 +23,5 @@ public class GenerationDataUtil {
         int randomIndex = random.nextInt(mobileCodesBelarus.length);
         int mobileCodeBelarus = mobileCodesBelarus[randomIndex];
         return String.format(countryCode + mobileCodeBelarus + RandomStringUtils.randomNumeric(7));
-    }
-
-    public static String generateIncorrectLogin() {
-        return RandomStringUtils.randomAscii(4, 14);
     }
 }
