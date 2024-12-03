@@ -30,4 +30,13 @@ public class ApiUser {
     public String getPhone() {
         return phone;
     }
+
+    @Override
+    public String toString() {
+        return "ApiUser{" +
+                "password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
+                '}';
+    }
 }
