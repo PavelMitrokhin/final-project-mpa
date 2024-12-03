@@ -6,6 +6,8 @@ import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.response.Response;
 import io.restassured.response.ValidatableResponse;
 import io.restassured.specification.RequestSpecification;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,6 +17,7 @@ import static io.restassured.RestAssured.given;
 public class LoginRequest {
     public static RequestSpecification requestSpecification;
     public static String loginUrl = "https://api.fix-price.by/buyer/v2/auth/login";
+    private static final Logger logger = LogManager.getLogger();
 
     public static Map<String, String> getAllHeaders() {
         Map<String, String> headers = new HashMap<>();
@@ -48,6 +51,7 @@ public class LoginRequest {
     }
 
     public ValidatableResponse getResponseForRequestedData(ApiUser apiUser) {
+        logger.info("User = password: {}, email: {}, phone: {}", apiUser.getPassword(), apiUser.getEmail(), apiUser.getPhone());
         ValidatableResponse response = given()
                 .spec(LoginRequest.requestSpecification)
                 .body("{\n" +
@@ -104,7 +108,7 @@ public class LoginRequest {
         return response;
     }
 
-    public ValidatableResponse getResponseForRequestedDataNoContentType(){
+    public ValidatableResponse getResponseForRequestedDataNoContentType() {
         ValidatableResponse response = given()
                 .body("{\n" +
                         "    \"password\": null,\n" +
@@ -118,16 +122,17 @@ public class LoginRequest {
         return response;
     }
 
-    public boolean hasTooManyRequests(ApiUser user) {
+    public boolean hasTooManyRequests(ApiUser apiUser) {
         boolean hasTooManyRequestsResponse = false;
-
+        logger.info("User = password: {}, email: {}, phone: {}",
+                apiUser.getPassword(), apiUser.getEmail(), apiUser.getPhone());
         while (!hasTooManyRequestsResponse) {
             Response response = given()
                     .spec(LoginRequest.requestSpecification)
                     .body("{\n" +
-                            "    \"password\":" + user.getPassword() + ",\n" +
-                            "    \"email\":" + user.getEmail() + ",\n" +
-                            "    \"phone\":" + user.getPhone() + "\n" +
+                            "    \"password\":" + apiUser.getPassword() + ",\n" +
+                            "    \"email\":" + apiUser.getEmail() + ",\n" +
+                            "    \"phone\":" + apiUser.getPhone() + "\n" +
                             "}")
                     .when()
                     .post();
@@ -139,25 +144,30 @@ public class LoginRequest {
                 }
             }
         }
+        logger.info("value \"hasTooManyRequestsResponse\": {}", hasTooManyRequestsResponse);
         return hasTooManyRequestsResponse;
     }
 
-    public boolean sendFiveTries(ApiUser user){
+    public boolean sendFiveTries(ApiUser apiUser) {
         boolean hasFiveRequestsResponse = false;
 
         for (int i = 1; i < 6; i++) {
+            logger.info("tempt #{}", i);
+            logger.info("User = password: {}, email: {}, phone: {}",
+                    apiUser.getPassword(), apiUser.getEmail(), apiUser.getPhone());
             Response response = given()
                     .spec(LoginRequest.requestSpecification)
                     .body("{\n" +
-                            "    \"password\":" + user.getPassword() + ",\n" +
-                            "    \"email\":" + user.getEmail() + ",\n" +
-                            "    \"phone\":" + user.getPhone() + "\n" +
+                            "    \"password\":" + apiUser.getPassword() + ",\n" +
+                            "    \"email\":" + apiUser.getEmail() + ",\n" +
+                            "    \"phone\":" + apiUser.getPhone() + "\n" +
                             "}")
                     .when()
                     .post();
 
             if (response.statusCode() == 400) {
                 String message = response.then().extract().path("message");
+                logger.info("message: {}", message);
                 if (message.contains(LoginResponse.WARNING_LOGIN_LIMITS_EXCEEDED)) {
                     hasFiveRequestsResponse = true;
                 }
@@ -169,6 +179,7 @@ public class LoginRequest {
                 e.printStackTrace();
             }
         }
+        logger.info("value \"hasFiveRequestsResponse\": {}", hasFiveRequestsResponse);
         return hasFiveRequestsResponse;
     }
 }
