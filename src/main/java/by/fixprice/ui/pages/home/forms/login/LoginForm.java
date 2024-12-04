@@ -15,27 +15,32 @@ public class LoginForm {
         this.driver = driver;
     }
 
-    public LoginForm selectPhoneTabLoginForm() {
+    public LoginForm selectPhoneTab() {
         driver.findElement(By.xpath(LoginFormXpath.BUTTON_PHONE_TAB_XPATH)).click();
         return this;
     }
 
-    public LoginForm selectEmailTabLoginForm() {
+    public LoginForm selectEmailTab() {
         driver.findElement(By.xpath(LoginFormXpath.BUTTON_EMAIL_TAB_XPATH)).sendKeys();
         return this;
     }
 
-    public LoginForm sendEmailOrPhoneLoginForm() {
-        driver.findElement(By.xpath(LoginFormXpath.INPUT_PHONE_EMAIL_XPATH)).sendKeys();
+    public LoginForm clickLoginField() {
+        driver.findElement(By.xpath(LoginFormXpath.INPUT_LOGIN_XPATH)).click();
         return this;
     }
 
-    public LoginForm sendPasswordLoginForm() {
-        driver.findElement(By.xpath(LoginFormXpath.INPUT_PASSWORD_XPATH)).sendKeys();
+    public LoginForm sendLogin(String login) {
+        driver.findElement(By.xpath(LoginFormXpath.INPUT_LOGIN_XPATH)).sendKeys(login);
         return this;
     }
 
-    public LoginForm clickCheckboxLoginForm() {
+    public LoginForm sendPassword(String password) {
+        driver.findElement(By.xpath(LoginFormXpath.INPUT_PASSWORD_XPATH)).sendKeys(password);
+        return this;
+    }
+
+    public LoginForm clickAgreementCheckbox() {
         driver.findElement(By.xpath(LoginFormXpath.CHECKBOX_AGREEMENT_XPATH)).click();
         return this;
     }
