@@ -12,17 +12,13 @@ public class LoginForm {
         driver = Driver.getDriver();
     }
 
-    public LoginForm(WebDriver driver) {
-        this.driver = driver;
-    }
-
     public LoginForm selectPhoneTab() {
         driver.findElement(By.xpath(LoginFormXpath.BUTTON_PHONE_TAB_XPATH)).click();
         return this;
     }
 
     public LoginForm selectEmailTab() {
-        driver.findElement(By.xpath(LoginFormXpath.BUTTON_EMAIL_TAB_XPATH)).sendKeys();
+        driver.findElement(By.xpath(LoginFormXpath.BUTTON_EMAIL_TAB_XPATH)).click();
         return this;
     }
 
