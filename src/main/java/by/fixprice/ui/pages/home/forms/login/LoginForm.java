@@ -51,7 +51,7 @@ public class LoginForm {
         return this;
     }
 
-    public String getTitleLoginForm(){
-        return driver.findElement(By.xpath(LoginFormXpath.LOGIN_FORM_TITLE_XPATH)).getText();
+    public String getErrorInvalidLoginOrPassword() {
+        return driver.findElement(By.xpath(LoginFormXpath.INVALID_LOGIN_OR_PASSWORD_XPATH)).getText();
     }
 }
