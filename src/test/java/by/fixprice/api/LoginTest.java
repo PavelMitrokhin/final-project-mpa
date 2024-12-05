@@ -2,7 +2,7 @@ package by.fixprice.api;
 
 import by.fixprice.api.requests.LoginRequest;
 import by.fixprice.api.responses.LoginResponse;
-import by.fixprice.utils.api.ApiUsers;
+import by.fixprice.utils.ApiUsers;
 import io.restassured.response.ValidatableResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
