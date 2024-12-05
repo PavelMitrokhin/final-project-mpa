@@ -43,10 +43,11 @@ public class User {
 
     @Override
     public String toString() {
-        return "ApiUser{" +
+        return "User{" +
                 "password='" + password + '\'' +
                 ", email='" + email + '\'' +
                 ", phone='" + phone + '\'' +
+                ", login='" + login + '\'' +
                 '}';
     }
 }
