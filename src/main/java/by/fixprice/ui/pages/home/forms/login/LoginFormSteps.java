@@ -15,6 +15,18 @@ public class LoginFormSteps {
                 sendPassword(user.getPhoneAndPasswordUser()).
                 clickAgreementCheckbox().
                 clickEnterLoginForm();
-        return loginForm.getTitleLoginForm();
+        return loginForm.getErrorInvalidLoginOrPassword();
+    }
+
+    public String checkInvalidEmailUser() {
+        UiUsers user = new UiUsers();
+        homePage.openLoginForm();
+        loginForm.
+                selectEmailTab().
+                sendLogin(user.getEmailAndPasswordUser()).
+                sendPassword(user.getEmailAndPasswordUser()).
+                clickAgreementCheckbox().
+                clickEnterLoginForm();
+        return loginForm.getErrorInvalidLoginOrPassword();
     }
 }
