@@ -1,6 +1,7 @@
 package by.fixprice.ui.pages.home.forms.login;
 
 import by.fixprice.ui.driver.Driver;
+import by.fixprice.utils.User;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -30,13 +31,13 @@ public class LoginForm {
         return this;
     }
 
-    public LoginForm sendLogin(String login) {
-        driver.findElement(By.xpath(LoginFormXpath.INPUT_LOGIN_XPATH)).sendKeys(login);
+    public LoginForm sendLogin(User user) {
+        driver.findElement(By.xpath(LoginFormXpath.INPUT_LOGIN_XPATH)).sendKeys(user.getLogin());
         return this;
     }
 
-    public LoginForm sendPassword(String password) {
-        driver.findElement(By.xpath(LoginFormXpath.INPUT_PASSWORD_XPATH)).sendKeys(password);
+    public LoginForm sendPassword(User user) {
+        driver.findElement(By.xpath(LoginFormXpath.INPUT_PASSWORD_XPATH)).sendKeys(user.getPassword());
         return this;
     }
 
