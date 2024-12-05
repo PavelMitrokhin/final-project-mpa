@@ -9,14 +9,20 @@ import org.junit.jupiter.api.Test;
 public class LoginFormTest extends BaseTest {
 
     @Test
-    @DisplayName("Invalid phone user")
-    public void testInvalidPhoneUser() {
+    @DisplayName("Invalid phone or password")
+    void testInvalidPhoneOrPasswordUser() {
         Assertions.assertEquals(LoginFormExpectations.INVALID_LOGIN_OR_PASSWORD, new LoginFormSteps().checkInvalidPhoneUser());
     }
 
     @Test
-    @DisplayName("Invalid email user")
-    public void testInvalidEmailUser() {
+    @DisplayName("Invalid email or password")
+    void testInvalidEmailOrPasswordUser() {
         Assertions.assertEquals(LoginFormExpectations.INVALID_LOGIN_OR_PASSWORD, new LoginFormSteps().checkInvalidEmailUser());
+    }
+
+    @Test
+    @DisplayName("Incorrect email")
+    void testIncorrectEmail() {
+        Assertions.assertEquals(LoginFormExpectations.INCORRECT_EMAIL_OR_PASSWORD,new LoginFormSteps().checkIncorrectEmailUser());
     }
 }
