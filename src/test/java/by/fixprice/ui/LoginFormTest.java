@@ -11,6 +11,12 @@ public class LoginFormTest extends BaseTest {
     @Test
     @DisplayName("Invalid phone user")
     public void testInvalidPhoneUser() {
-        Assertions.assertEquals(LoginFormExpectations.LOGIN_FORM_TITLE, new LoginFormSteps().checkInvalidPhoneUser());
+        Assertions.assertEquals(LoginFormExpectations.INVALID_LOGIN_OR_PASSWORD, new LoginFormSteps().checkInvalidPhoneUser());
+    }
+
+    @Test
+    @DisplayName("Invalid email user")
+    public void testInvalidEmailUser() {
+        Assertions.assertEquals(LoginFormExpectations.INVALID_LOGIN_OR_PASSWORD, new LoginFormSteps().checkInvalidEmailUser());
     }
 }
