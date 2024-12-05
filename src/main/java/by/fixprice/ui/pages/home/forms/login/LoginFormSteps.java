@@ -9,8 +9,7 @@ public class LoginFormSteps {
 
     public String checkInvalidPhoneUser() {
         UiUsers user = new UiUsers();
-        homePage.openLoginForm();
-        loginForm.
+        homePage.openLoginForm().
                 sendLogin(user.getPhoneAndPasswordUser()).
                 sendPassword(user.getPhoneAndPasswordUser()).
                 clickAgreementCheckbox().
@@ -20,11 +19,21 @@ public class LoginFormSteps {
 
     public String checkInvalidEmailUser() {
         UiUsers user = new UiUsers();
-        homePage.openLoginForm();
-        loginForm.
+        homePage.openLoginForm().
                 selectEmailTab().
                 sendLogin(user.getEmailAndPasswordUser()).
                 sendPassword(user.getEmailAndPasswordUser()).
+                clickAgreementCheckbox().
+                clickEnterLoginForm();
+        return loginForm.getErrorInvalidLoginOrPassword();
+    }
+
+    public String checkIncorrectEmailUser() {
+        UiUsers user = new UiUsers();
+        homePage.openLoginForm().
+                selectEmailTab().
+                sendLogin(user.getIncorrectEmailUser()).
+                sendPassword(user.getIncorrectEmailUser()).
                 clickAgreementCheckbox().
                 clickEnterLoginForm();
         return loginForm.getErrorInvalidLoginOrPassword();
