@@ -9,5 +9,5 @@ public class LoginFormXpath {
     public static final String BUTTON_ENTER_XPATH = "//button[@class='button enter-button normal']";
 
 
-    public static final String LOGIN_FORM_TITLE_XPATH = "//h1[@class='form-title']";
+    public static final String INVALID_LOGIN_OR_PASSWORD_XPATH = "//div[@class='error']";
 }
