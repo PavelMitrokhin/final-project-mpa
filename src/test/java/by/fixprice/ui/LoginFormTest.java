@@ -25,4 +25,10 @@ public class LoginFormTest extends BaseTest {
     void testIncorrectEmail() {
         Assertions.assertEquals(LoginFormExpectations.INCORRECT_EMAIL_OR_PASSWORD,new LoginFormSteps().checkIncorrectEmailUser());
     }
+
+    @Test
+    @DisplayName("No password")
+    void testNoPassword() {
+        Assertions.assertEquals(LoginFormExpectations.PASSWORD_REQUIRED, new LoginFormSteps().checkEmptyPassword());
+    }
 }
