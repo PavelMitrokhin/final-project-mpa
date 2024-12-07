@@ -1,7 +1,7 @@
 package by.fixprice.api.requests;
 
 import by.fixprice.api.responses.LoginResponse;
-import by.fixprice.utils.api.ApiUser;
+import by.fixprice.utils.User;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.response.Response;
 import io.restassured.response.ValidatableResponse;
@@ -50,14 +50,14 @@ public class LoginRequest {
         return response;
     }
 
-    public ValidatableResponse getResponseForRequestedData(ApiUser apiUser) {
-        logger.info("User = password: {}, email: {}, phone: {}", apiUser.getPassword(), apiUser.getEmail(), apiUser.getPhone());
+    public ValidatableResponse getResponseForRequestedData(User user) {
+        logger.info("User = password: {}, email: {}, phone: {}", user.getPassword(), user.getEmail(), user.getPhone());
         ValidatableResponse response = given()
                 .spec(LoginRequest.requestSpecification)
                 .body("{\n" +
-                        "    \"password\":" + apiUser.getPassword() + ",\n" +
-                        "    \"email\":" + apiUser.getEmail() + ",\n" +
-                        "    \"phone\":" + apiUser.getPhone() + "\n" +
+                        "    \"password\":" + user.getPassword() + ",\n" +
+                        "    \"email\":" + user.getEmail() + ",\n" +
+                        "    \"phone\":" + user.getPhone() + "\n" +
                         "}")
                 .when()
                 .post()
@@ -122,17 +122,17 @@ public class LoginRequest {
         return response;
     }
 
-    public boolean hasTooManyRequests(ApiUser apiUser) {
+    public boolean hasTooManyRequests(User user) {
         boolean hasTooManyRequestsResponse = false;
         logger.info("User = password: {}, email: {}, phone: {}",
-                apiUser.getPassword(), apiUser.getEmail(), apiUser.getPhone());
+                user.getPassword(), user.getEmail(), user.getPhone());
         while (!hasTooManyRequestsResponse) {
             Response response = given()
                     .spec(LoginRequest.requestSpecification)
                     .body("{\n" +
-                            "    \"password\":" + apiUser.getPassword() + ",\n" +
-                            "    \"email\":" + apiUser.getEmail() + ",\n" +
-                            "    \"phone\":" + apiUser.getPhone() + "\n" +
+                            "    \"password\":" + user.getPassword() + ",\n" +
+                            "    \"email\":" + user.getEmail() + ",\n" +
+                            "    \"phone\":" + user.getPhone() + "\n" +
                             "}")
                     .when()
                     .post();
@@ -148,19 +148,19 @@ public class LoginRequest {
         return hasTooManyRequestsResponse;
     }
 
-    public boolean sendFiveTries(ApiUser apiUser) {
+    public boolean sendFiveTries(User user) {
         boolean hasFiveRequestsResponse = false;
 
         for (int i = 1; i < 6; i++) {
             logger.info("tempt #{}", i);
             logger.info("User = password: {}, email: {}, phone: {}",
-                    apiUser.getPassword(), apiUser.getEmail(), apiUser.getPhone());
+                    user.getPassword(), user.getEmail(), user.getPhone());
             Response response = given()
                     .spec(LoginRequest.requestSpecification)
                     .body("{\n" +
-                            "    \"password\":" + apiUser.getPassword() + ",\n" +
-                            "    \"email\":" + apiUser.getEmail() + ",\n" +
-                            "    \"phone\":" + apiUser.getPhone() + "\n" +
+                            "    \"password\":" + user.getPassword() + ",\n" +
+                            "    \"email\":" + user.getEmail() + ",\n" +
+                            "    \"phone\":" + user.getPhone() + "\n" +
                             "}")
                     .when()
                     .post();

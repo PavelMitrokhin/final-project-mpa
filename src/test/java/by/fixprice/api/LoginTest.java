@@ -2,17 +2,21 @@ package by.fixprice.api;
 
 import by.fixprice.api.requests.LoginRequest;
 import by.fixprice.api.responses.LoginResponse;
-import by.fixprice.utils.api.ApiUsers;
+import by.fixprice.utils.ApiUsers;
 import io.restassured.response.ValidatableResponse;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.*;
 
 import static org.hamcrest.Matchers.*;
 
 public class LoginTest {
+    private static final Logger logger = LogManager.getLogger();
 
     @BeforeEach
-    public void setUp() {
+    public void setUp(TestInfo testInfo) {
         LoginRequest.initRequestSpecification();
+        logger.info("Test name: {}", testInfo.getDisplayName());
     }
 
     @Test
