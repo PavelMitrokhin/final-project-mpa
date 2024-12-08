@@ -74,7 +74,7 @@ public class LoginForm {
 
     public String getCodeSentTitle() {
         logger.info("Get 'send code' title");
-        return driver.findElement(By.xpath(LoginFormXpath.CODE_IS_SENT_TITLE_XPATH)).getText();
+        return driver.findElement(By.xpath(LoginFormXpath.CODE_IS_SENT_TEXT_XPATH)).getText();
     }
 
     public LoginForm changeRegisterPhone() {
@@ -83,10 +83,29 @@ public class LoginForm {
         return this;
     }
 
+    public String getRegisterFormText() {
+        logger.info("Return to register form");
+        return driver.findElement(By.xpath(LoginFormXpath.ENTER_PHONE_TEXT_XPATH)).getText();
+    }
+
     public LoginForm resendCode() {
         logger.info("Resend code");
         driver.findElement(By.xpath(LoginFormXpath.BUTTON_RESEND_CODE_XPATH)).click();
         return this;
+    }
+
+    public String getAttribute (String locator, String attribute) {
+        if(attribute!=null) {
+            logger.info("Locator = {}, attribute = {}", locator, attribute);
+        } else logger.info("attribute is null");
+        String attributeValue = driver.findElement(By.xpath(locator)).getAttribute(attribute);
+        logger.info("attribute value = {}", attributeValue);
+        return attributeValue;
+    }
+
+    public boolean isElementEnabled (String locator) {
+        logger.info("isElementEnabled {}", locator);
+        return driver.findElement(By.xpath(locator)).isEnabled();
     }
 
     public LoginForm backToLogin() {
@@ -104,5 +123,23 @@ public class LoginForm {
     public String getSmsHelpTitle() {
         logger.info("Get sms help title");
         return driver.findElement(By.xpath(LoginFormXpath.SMS_HELP_TITLE_XPATH)).getText();
+    }
+
+    public LoginForm clickForgotPassword() {
+        logger.info("Click forgot password");
+        driver.findElement(By.xpath(LoginFormXpath.BUTTON_FORGOT_PASSWORD_XPATH)).click();
+        return this;
+    }
+
+    public LoginForm clickGetLink() {
+        logger.info("Click get link");
+        driver.findElement(By.xpath(LoginFormXpath.BUTTON_GET_LINK_XPATH)).click();
+        return this;
+    }
+
+    public LoginForm restoreByPhone() {
+        logger.info("Restore by phone");
+        driver.findElement(By.xpath(LoginFormXpath.BUTTON_RESTORE_BY_PHONE_XPATH)).click();
+        return this;
     }
 }

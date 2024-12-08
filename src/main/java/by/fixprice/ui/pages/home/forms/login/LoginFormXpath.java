@@ -18,7 +18,8 @@ public class LoginFormXpath {
     public static final String BUTTON_RESTORE_BY_PHONE_XPATH = "//button[@class='link'][contains(text(),'Восстановить по номеру телефона')]";
 
     public static final String INVALID_LOGIN_OR_PASSWORD_XPATH = "//div[@class='error']";
-    public static final String CODE_IS_SENT_TITLE_XPATH = "//p[@class='phone-title'][contains(text(),'Сейчас Вам поступит СМС')]";
+    public static final String CODE_IS_SENT_TEXT_XPATH = "//p[@class='phone-title'][contains(text(),'Сейчас Вам поступит СМС')]";
+    public static final String ENTER_PHONE_TEXT_XPATH = "//p[@class='phone-title'][contains(text(),'Укажите Ваш номер телефона')]";
     public static final String SMS_HELP_TITLE_XPATH = "//div[@class='text'][contains(text(),'Не приходит СМС?')]";
     public static final String LOGIN_TITLE_XPATH = "//h1[@class='form-title']";
 
