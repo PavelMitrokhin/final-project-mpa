@@ -33,20 +33,20 @@ public class LoginForm {
     }
 
     public LoginForm sendEmail(User user) {
-        logger.info("Login: {}", user.getLogin());
+        logger.info("Email: {}", user.getLogin());
         driver.findElement(By.xpath(LoginFormXpath.INPUT_EMAIL_XPATH)).sendKeys(user.getLogin());
         return this;
     }
 
     public LoginForm sendRestoreEmail(User user) {
-        logger.info("Login: {}", user.getLogin());
-        driver.findElement(By.xpath(LoginFormXpath.INPUT_PHONE_XPATH)).sendKeys(user.getLogin());
+        logger.info("Email: {}", user.getLogin());
+        driver.findElement(By.xpath(LoginFormXpath.INPUT_LOGIN_XPATH)).sendKeys(user.getLogin());
         return this;
     }
 
     public LoginForm sendPhone(User user) {
-        logger.info("Login: {}", user.getLogin());
-        driver.findElement(By.xpath(LoginFormXpath.INPUT_PHONE_XPATH)).sendKeys(user.getLogin());
+        logger.info("Phone: {}", user.getLogin());
+        driver.findElement(By.xpath(LoginFormXpath.INPUT_LOGIN_XPATH)).sendKeys(user.getLogin());
         return this;
     }
 
@@ -163,7 +163,14 @@ public class LoginForm {
     }
 
     public LoginForm sendName() {
+        logger.info("Send Name");
         driver.findElement(By.xpath(LoginFormXpath.INPUT_NAME_XPATH)).sendKeys(GenerationDataUtil.generateName());
+        return this;
+    }
+
+    public LoginForm clickShowPassword() {
+        logger.info("Click 'Show password'");
+        driver.findElement(By.xpath(LoginFormXpath.ICON_SHOW_PASSWORD_XPATH)).click();
         return this;
     }
 }
