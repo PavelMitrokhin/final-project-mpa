@@ -1,6 +1,7 @@
 package by.fixprice.ui.pages.home.forms.login;
 
 import by.fixprice.ui.driver.Driver;
+import by.fixprice.utils.GenerationDataUtil;
 import by.fixprice.utils.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -94,8 +95,8 @@ public class LoginForm {
         return this;
     }
 
-    public String getAttribute (String locator, String attribute) {
-        if(attribute!=null) {
+    public String getAttribute(String locator, String attribute) {
+        if (attribute != null) {
             logger.info("Locator = {}, attribute = {}", locator, attribute);
         } else logger.info("attribute is null");
         String attributeValue = driver.findElement(By.xpath(locator)).getAttribute(attribute);
@@ -103,7 +104,7 @@ public class LoginForm {
         return attributeValue;
     }
 
-    public boolean isElementEnabled (String locator) {
+    public boolean isElementEnabled(String locator) {
         logger.info("isElementEnabled {}", locator);
         return driver.findElement(By.xpath(locator)).isEnabled();
     }
@@ -140,6 +141,11 @@ public class LoginForm {
     public LoginForm restoreByPhone() {
         logger.info("Restore by phone");
         driver.findElement(By.xpath(LoginFormXpath.BUTTON_RESTORE_BY_PHONE_XPATH)).click();
+        return this;
+    }
+
+    public LoginForm sendName() {
+        driver.findElement(By.xpath(LoginFormXpath.INPUT_NAME_XPATH)).sendKeys(GenerationDataUtil.generateName());
         return this;
     }
 }
