@@ -86,4 +86,16 @@ public class LoginFormTest extends BaseTest {
     void testSendInvalidPhoneForRestore() {
         Assertions.assertEquals(LoginFormExpectations.INCORRECT_RESTORE_LOGIN, new LoginFormSteps().checkInvalidRestorePhone());
     }
+
+    @Test
+    @DisplayName("Check active tab in Login")
+    void testCheckActiveTabInLogin() {
+        Assertions.assertEquals("button toggle small active", new LoginFormSteps().checkTabInLogin());
+    }
+
+    @Test
+    @DisplayName("Check 'Show password' icon")
+    void testCheckShowPasswordIcon() {
+        Assertions.assertEquals("text", new LoginFormSteps().checkShowPassword());
+    }
 }
