@@ -17,7 +17,7 @@ public class LoginFormSteps {
 
     public String checkInvalidPhoneUser() {
         homePage.openLoginForm()
-                .sendLogin(user.getPhoneAndPasswordUser())
+                .sendPhone(user.getPhoneAndPasswordUser())
                 .sendPassword(user.getPhoneAndPasswordUser())
                 .clickAgreementCheckbox()
                 .clickEnterLoginForm();
@@ -27,7 +27,7 @@ public class LoginFormSteps {
     public String checkInvalidEmailUser() {
         homePage.openLoginForm()
                 .selectEmailTab()
-                .sendLogin(user.getEmailAndPasswordUser())
+                .sendEmail(user.getEmailAndPasswordUser())
                 .sendPassword(user.getEmailAndPasswordUser())
                 .clickAgreementCheckbox()
                 .clickEnterLoginForm();
@@ -37,7 +37,7 @@ public class LoginFormSteps {
     public String checkIncorrectEmailUser() {
         homePage.openLoginForm()
                 .selectEmailTab()
-                .sendLogin(user.getIncorrectEmailUser())
+                .sendEmail(user.getIncorrectEmailUser())
                 .sendPassword(user.getIncorrectEmailUser())
                 .clickAgreementCheckbox()
                 .clickEnterLoginForm();
@@ -46,7 +46,7 @@ public class LoginFormSteps {
 
     public String checkEmptyPassword() {
         homePage.openLoginForm()
-                .sendLogin(user.getPhoneAndPasswordUser())
+                .sendPhone(user.getPhoneAndPasswordUser())
                 .clickAgreementCheckbox()
                 .clickEnterLoginForm();
         return loginForm.getErrorInvalidLoginOrPassword();
@@ -55,7 +55,7 @@ public class LoginFormSteps {
     public String checkRegisterCodeSent() {
         homePage.openLoginForm()
                 .clickRegisterButton()
-                .sendLogin(user.getPhoneAndPasswordUser())
+                .sendPhone(user.getPhoneAndPasswordUser())
                 .clickAgreementCheckbox()
                 .clickContinueRegisterButton();
         return loginForm.getCodeSentTitle();
@@ -64,7 +64,7 @@ public class LoginFormSteps {
     public String checkChangeRegisterPhone() {
         homePage.openLoginForm()
                 .clickRegisterButton()
-                .sendLogin(user.getPhoneAndPasswordUser())
+                .sendPhone(user.getPhoneAndPasswordUser())
                 .clickAgreementCheckbox()
                 .clickContinueRegisterButton()
                 .changeRegisterPhone();
@@ -82,7 +82,7 @@ public class LoginFormSteps {
     public boolean checkCodeResend() {
         homePage.openLoginForm()
                 .clickRegisterButton()
-                .sendLogin(user.getPhoneAndPasswordUser())
+                .sendPhone(user.getPhoneAndPasswordUser())
                 .clickAgreementCheckbox()
                 .clickContinueRegisterButton()
                 .resendCode();
@@ -99,18 +99,18 @@ public class LoginFormSteps {
     public String checkSmsHelpPopup() {
         homePage.openLoginForm()
                 .clickRegisterButton()
-                .sendLogin(user.getPhoneAndPasswordUser())
+                .sendPhone(user.getPhoneAndPasswordUser())
                 .clickAgreementCheckbox()
                 .clickContinueRegisterButton()
                 .clickSmsHelp();
         return loginForm.getSmsHelpTitle();
     }
 
-    public String checkInCorrectRestoreEmail() {
+    public String checkInvalidRestoreEmail() {
         homePage.openLoginForm()
                 .clickForgotPassword()
-                .sendLogin(user.getEmailAndPasswordUser())
-                .clickGetLink();
+                .sendRestoreEmail(user.getEmailAndPasswordUser())
+                .clickGetLinkByEmail();
         return loginForm.getErrorInvalidLoginOrPassword();
     }
 
@@ -118,12 +118,12 @@ public class LoginFormSteps {
         boolean hasFiveRequestsResponse = false;
         homePage.openLoginForm()
                 .clickForgotPassword()
-                .sendLogin(user.getEmailAndPasswordUser());
+                .sendRestoreEmail(user.getEmailAndPasswordUser());
 
         for (int i = 1; i < 6; i++) {
             logger.info("tempt #{}, email: {}, hasFiveRequestsResponse: {}",
                     i, user.getEmailAndPasswordUser().getLogin(), hasFiveRequestsResponse);
-            String message = loginForm.clickGetLink().getErrorInvalidLoginOrPassword();
+            String message = loginForm.clickGetLinkByEmail().getErrorInvalidLoginOrPassword();
             logger.info("message: {}", message);
             if (Objects.equals(message, LoginFormExpectations.INCORRECT_RESTORE_EMAIL_LIMIT)) {
                 hasFiveRequestsResponse = true;
@@ -132,5 +132,15 @@ public class LoginFormSteps {
 
         logger.info("value \"hasFiveRequestsResponse\": {}", hasFiveRequestsResponse);
         return hasFiveRequestsResponse;
+    }
+
+    public String checkInvalidRestorePhone() {
+        homePage.openLoginForm()
+                .clickForgotPassword()
+                .restoreByPhone()
+                .sendPhone(user.getPhoneAndPasswordUser())
+                .sendName()
+                .clickGetLinkByPhone();
+        return loginForm.getErrorInvalidLoginOrPassword();
     }
 }

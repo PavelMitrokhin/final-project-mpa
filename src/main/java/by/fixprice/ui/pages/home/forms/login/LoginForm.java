@@ -32,9 +32,21 @@ public class LoginForm {
         return this;
     }
 
-    public LoginForm sendLogin(User user) {
+    public LoginForm sendEmail(User user) {
         logger.info("Login: {}", user.getLogin());
-        driver.findElement(By.xpath(LoginFormXpath.INPUT_LOGIN_XPATH)).sendKeys(user.getLogin());
+        driver.findElement(By.xpath(LoginFormXpath.INPUT_EMAIL_XPATH)).sendKeys(user.getLogin());
+        return this;
+    }
+
+    public LoginForm sendRestoreEmail(User user) {
+        logger.info("Login: {}", user.getLogin());
+        driver.findElement(By.xpath(LoginFormXpath.INPUT_PHONE_XPATH)).sendKeys(user.getLogin());
+        return this;
+    }
+
+    public LoginForm sendPhone(User user) {
+        logger.info("Login: {}", user.getLogin());
+        driver.findElement(By.xpath(LoginFormXpath.INPUT_PHONE_XPATH)).sendKeys(user.getLogin());
         return this;
     }
 
@@ -132,9 +144,15 @@ public class LoginForm {
         return this;
     }
 
-    public LoginForm clickGetLink() {
+    public LoginForm clickGetLinkByEmail() {
         logger.info("Click get link");
-        driver.findElement(By.xpath(LoginFormXpath.BUTTON_GET_LINK_XPATH)).click();
+        driver.findElement(By.xpath(LoginFormXpath.BUTTON_GET_LINK_BY_EMAIL_XPATH)).click();
+        return this;
+    }
+
+    public LoginForm clickGetLinkByPhone() {
+        logger.info("Click get link");
+        driver.findElement(By.xpath(LoginFormXpath.BUTTON_GET_LINK_BY_PHONE_XPATH)).click();
         return this;
     }
 

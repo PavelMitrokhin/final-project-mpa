@@ -70,14 +70,20 @@ public class LoginFormTest extends BaseTest {
     }
 
     @Test
-    @DisplayName("Send incorrect email for restore")
-    void testSendIncorrectEmailForRestore() {
-        Assertions.assertEquals(LoginFormExpectations.INCORRECT_RESTORE_EMAIL, new LoginFormSteps().checkInvalidRestoreEmail());
+    @DisplayName("Send invalid email for restore")
+    void testSendInvalidEmailForRestore() {
+        Assertions.assertEquals(LoginFormExpectations.INCORRECT_RESTORE_LOGIN, new LoginFormSteps().checkInvalidRestoreEmail());
     }
 
     @Test
     @DisplayName("Send incorrect email for restore 5 times")
-    void testSendIncorrectEmailForRestoreFiveTimes() {
+    void testSendInvalidEmailForRestoreFiveTimes() {
         Assert.isTrue(new LoginFormSteps().hasFiveTriesToRestore(), "No limit exceed message");
+    }
+
+    @Test
+    @DisplayName("Send invalid phone for restore")
+    void testSendInvalidPhoneForRestore() {
+        Assertions.assertEquals(LoginFormExpectations.INCORRECT_RESTORE_LOGIN, new LoginFormSteps().checkInvalidRestorePhone());
     }
 }
