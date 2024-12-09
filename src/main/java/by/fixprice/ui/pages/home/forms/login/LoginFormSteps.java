@@ -143,4 +143,17 @@ public class LoginFormSteps {
                 .clickGetLinkByPhone();
         return loginForm.getErrorInvalidLoginOrPassword();
     }
+
+    public String checkTabInLogin() {
+        homePage.openLoginForm()
+                .selectEmailTab()
+                .selectPhoneTab();
+        return loginForm.getAttribute(LoginFormXpath.BUTTON_PHONE_TAB_XPATH, "class");
+    }
+
+    public String checkShowPassword() {
+        homePage.openLoginForm()
+                .clickShowPassword();
+        return loginForm.getAttribute(LoginFormXpath.INPUT_PASSWORD_XPATH, "type");
+    }
 }
