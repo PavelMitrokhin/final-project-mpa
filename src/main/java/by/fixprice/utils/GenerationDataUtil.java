@@ -17,18 +17,20 @@ public class GenerationDataUtil {
     }
 
     public static String generateBelarusMobilePhone(String countryCode) {
-        Random random = new Random();
         int[] mobileCodesBelarus = {25, 29, 33, 44};
-        int randomIndex = random.nextInt(mobileCodesBelarus.length);
+        int randomIndex = new Random().nextInt(mobileCodesBelarus.length);
         int mobileCodeBelarus = mobileCodesBelarus[randomIndex];
         return String.format(countryCode + mobileCodeBelarus + RandomStringUtils.randomNumeric(7));
     }
 
     public static String generateBelarusMobilePhone() {
-        Random random = new Random();
         int[] mobileCodesBelarus = {25, 29, 33, 44};
-        int randomIndex = random.nextInt(mobileCodesBelarus.length);
+        int randomIndex = new Random().nextInt(mobileCodesBelarus.length);
         int mobileCodeBelarus = mobileCodesBelarus[randomIndex];
         return String.format(mobileCodeBelarus + RandomStringUtils.randomNumeric(7));
+    }
+
+    public static String generateName() {
+        return new Faker().name().firstName();
     }
 }
