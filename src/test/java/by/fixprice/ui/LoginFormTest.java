@@ -2,6 +2,7 @@ package by.fixprice.ui;
 
 import by.fixprice.ui.pages.home.forms.login.LoginFormExpectations;
 import by.fixprice.ui.pages.home.forms.login.LoginFormSteps;
+import dev.failsafe.internal.util.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -63,8 +64,20 @@ public class LoginFormTest extends BaseTest {
     }
 
     @Test
-    @DisplayName("check display of SMS help")
+    @DisplayName("Check display of SMS help")
     void testCheckDisplayOfSMSHelp() {
         Assertions.assertEquals(LoginFormExpectations.SMS_HELP_TITLE, new LoginFormSteps().checkSmsHelpPopup());
+    }
+
+    @Test
+    @DisplayName("Send incorrect email for restore")
+    void testSendIncorrectEmailForRestore() {
+        Assertions.assertEquals(LoginFormExpectations.INCORRECT_RESTORE_EMAIL, new LoginFormSteps().checkInCorrectRestoreEmail());
+    }
+
+    @Test
+    @DisplayName("Send incorrect email for restore 5 times")
+    void testSendIncorrectEmailForRestoreFiveTimes() {
+        Assert.isTrue(new LoginFormSteps().hasFiveTriesToRestore(), "No limit exceed message");
     }
 }
