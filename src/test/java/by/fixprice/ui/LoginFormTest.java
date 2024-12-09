@@ -72,7 +72,7 @@ public class LoginFormTest extends BaseTest {
     @Test
     @DisplayName("Send incorrect email for restore")
     void testSendIncorrectEmailForRestore() {
-        Assertions.assertEquals(LoginFormExpectations.INCORRECT_RESTORE_EMAIL, new LoginFormSteps().checkInCorrectRestoreEmail());
+        Assertions.assertEquals(LoginFormExpectations.INCORRECT_RESTORE_EMAIL, new LoginFormSteps().checkInvalidRestoreEmail());
     }
 
     @Test
