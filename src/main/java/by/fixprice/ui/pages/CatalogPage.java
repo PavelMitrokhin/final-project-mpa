@@ -49,4 +49,18 @@ public class CatalogPage {
     public String getOrderShopAddressText() {
         return driver.findElement(By.xpath(CatalogPageXpath.OUTPUT_SHOP_ORDER_ADDRESS_XPATH)).getText();
     }
+
+    public CatalogPage closeGoodForm() {
+        driver.findElement(By.xpath(CatalogPageXpath.BUTTON_CLOSE_GOOD_FORM_XPATH)).click();
+        return this;
+    }
+
+    public CartPage clickCart() {
+        driver.findElement(By.xpath(CatalogPageXpath.LINK_CART_XPATH)).click();
+        return new CartPage();
+    }
+
+    public String getCartBadgeCounter() {
+        return driver.findElement(By.xpath(CatalogPageXpath.CART_BADGE_COUNTER_XPATH)).getText();
+    }
 }
