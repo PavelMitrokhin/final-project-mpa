@@ -9,4 +9,5 @@ public class CatalogPageXpath {
     public static final String BUTTON_CONFIRM_SHOP_XPATH = "//div[@class='select']";
     public static final String BUTTON_HEADER_SHOP_XPATH = "//div[@class='header-obtain-method']";
     public static final String OUTPUT_SHOP_ORDER_ADDRESS_XPATH = "//div[@class='title'][contains(text(),'г.Брест, ул.Московская, д.202')]";
+    public static final String BUTTON_SHOP_ORDER_ADDRESS_XPATH = "//button[@class='close'][@data-test='close-button']";
 }
