@@ -1,4 +1,4 @@
-package by.fixprice.ui.pages.home.forms.login;
+package by.fixprice.ui.forms.login;
 
 import by.fixprice.ui.driver.Driver;
 import by.fixprice.utils.GenerationDataUtil;

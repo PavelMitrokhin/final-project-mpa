@@ -1,4 +1,4 @@
-package by.fixprice.ui.pages.home.forms.login;
+package by.fixprice.ui.forms.login;
 
 public class LoginFormXpath {
     public static final String BUTTON_PHONE_TAB_XPATH = "//*[@id=\"modal\"]/div/div/div[1]/button[1]";

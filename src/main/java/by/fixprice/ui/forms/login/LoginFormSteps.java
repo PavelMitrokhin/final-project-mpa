@@ -1,6 +1,6 @@
-package by.fixprice.ui.pages.home.forms.login;
+package by.fixprice.ui.forms.login;
 
-import by.fixprice.ui.pages.home.HomePage;
+import by.fixprice.ui.pages.HomePage;
 import by.fixprice.utils.UiUsers;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

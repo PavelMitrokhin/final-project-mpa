@@ -1,7 +1,7 @@
 package by.fixprice.ui;
 
-import by.fixprice.ui.pages.home.forms.login.LoginFormExpectations;
-import by.fixprice.ui.pages.home.forms.login.LoginFormSteps;
+import by.fixprice.ui.forms.login.LoginFormExpectations;
+import by.fixprice.ui.forms.login.LoginFormSteps;
 import dev.failsafe.internal.util.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;

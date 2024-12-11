@@ -1,7 +1,7 @@
-package by.fixprice.ui.pages.home;
+package by.fixprice.ui.pages;
 
 import by.fixprice.ui.driver.Driver;
-import by.fixprice.ui.pages.home.forms.login.LoginForm;
+import by.fixprice.ui.forms.login.LoginForm;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
