@@ -17,7 +17,7 @@ public class CatalogPage {
     }
 
     public CatalogPage clickTownForDelivery() {
-        driver.findElement(By.xpath(CatalogPageXpath.SELECT_TARGET_TOWN_XPATH)).click();
+        driver.findElement(By.xpath(CatalogPageXpath.BUTTON_SELECT_TOWN_XPATH)).click();
         return this;
     }
 
