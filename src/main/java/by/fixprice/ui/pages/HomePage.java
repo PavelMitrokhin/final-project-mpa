@@ -16,4 +16,9 @@ public class HomePage {
         driver.findElement(By.xpath(HomePageXpath.BUTTON_LOGIN_FORM_XPATH)).click();
         return new LoginForm();
     }
+
+    public CatalogPage openHouseholdChemicals() {
+        driver.findElement(By.xpath(HomePageXpath.LINK_HOUSEHOLD_CHEMICALS_XPATH)).click();
+        return new CatalogPage();
+    }
 }
