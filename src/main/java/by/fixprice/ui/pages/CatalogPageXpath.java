@@ -11,4 +11,5 @@ public class CatalogPageXpath {
     public static final String OUTPUT_SHOP_ORDER_ADDRESS_XPATH = "//div[@class='title'][contains(text(),'г.Брест, ул.Московская, д.202')]";
     public static final String BUTTON_CLOSE_GOOD_FORM_XPATH = "//button[@class='close'][@data-test='close-button']";
     public static final String LINK_CART_XPATH = "//a[@class='cart link']";
+    public static final String CART_BADGE_COUNTER_XPATH = "//div[@class='badge count badge-sm']";
 }
