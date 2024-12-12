@@ -10,6 +10,10 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import java.util.List;
+import java.util.Random;
 
 public class HomePage {
     private WebDriver driver;
@@ -65,7 +69,7 @@ public class HomePage {
     }
 
     public HomePage clickMoskovskayaShop() {
-        logger.info("Click moskovskaya street shop");
+        logger.info("Click Moskovskaya street shop");
         driver.findElement(By.xpath(HomePageXpath.SELECT_MOSKOVSKAYA_SHOP_XPATH)).click();
         return this;
     }
@@ -96,5 +100,21 @@ public class HomePage {
     public String getCartBadgeCounter() {
         logger.info("Get cart badge counter");
         return driver.findElement(By.xpath(CatalogPageXpath.CART_BADGE_COUNTER_XPATH)).getText();
+    }
+
+    public HomePage clickRandomAddress() {
+        logger.info("Select random address");
+        List<WebElement> addresses = driver.findElements(By.xpath(HomePageXpath.SELECT_RANDOM_SHOP_XPATH));
+
+        if (addresses.isEmpty()){
+            throw new IllegalStateException("No address selected");
+        }
+
+        int randomIndex = new Random().nextInt(addresses.size());
+        WebElement selectRandomAddress = addresses.get(randomIndex);
+        selectRandomAddress.click();
+        logger.info("address {}", selectRandomAddress.getText());
+
+        return this;
     }
 }
