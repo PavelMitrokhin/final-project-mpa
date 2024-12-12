@@ -1,4 +1,4 @@
-package by.fixprice.ui.pages.home.forms.login;
+package by.fixprice.ui.forms.login;
 
 public class LoginFormExpectations {
     public static final String INVALID_LOGIN_OR_PASSWORD = "Неверный логин или пароль. Проверьте введённые данные и попробуйте снова. Осталось попыток: 4";
