@@ -30,12 +30,6 @@ public class HomePage {
         return new LoginForm();
     }
 
-    public CatalogPage openHouseholdChemicalsTab() {
-        logger.info("Open household chemicals tab");
-        driver.findElement(By.xpath(HomePageXpath.LINK_HOUSEHOLD_CHEMICALS_TAB_XPATH)).click();
-        return new CatalogPage();
-    }
-
     public <T> T performActionOnElement(By locator, Function<WebElement, T> action) {
         logger.info("Performing action on element with locator: " + locator);
         int maxRetries = 2;
@@ -51,10 +45,18 @@ public class HomePage {
         return null;
     }
 
+    public CatalogPage openHouseholdChemicalsTab() {
+        logger.info("Open household chemicals tab");
+        return performActionOnElement(By.xpath(HomePageXpath.LINK_HOUSEHOLD_CHEMICALS_TAB_XPATH), webElement -> {
+            webElement.click();
+            return new CatalogPage();
+        });
+    }
 
     public HomePage clickHeaderShopAddress() {
         logger.info("Click header shop address");
-        return performActionOnElement(By.xpath(HomePageXpath.BUTTON_HEADER_SHOP_XPATH), webElement -> {webElement.click();
+        return performActionOnElement(By.xpath(HomePageXpath.BUTTON_HEADER_SHOP_XPATH), webElement -> {
+            webElement.click();
             return this;
         });
     }
@@ -115,7 +117,7 @@ public class HomePage {
         logger.info("Select random address");
         List<WebElement> addresses = driver.findElements(By.xpath(HomePageXpath.SELECT_RANDOM_SHOP_XPATH));
 
-        if (addresses.isEmpty()){
+        if (addresses.isEmpty()) {
             throw new IllegalStateException("No address selected");
         }
 
