@@ -2,9 +2,9 @@ package by.fixprice.ui.pages.home;
 
 import by.fixprice.ui.driver.Driver;
 import by.fixprice.ui.forms.login.LoginForm;
-import by.fixprice.ui.pages.CartPage;
-import by.fixprice.ui.pages.CatalogPage;
-import by.fixprice.ui.pages.CatalogPageXpath;
+import by.fixprice.ui.pages.cart.CartPage;
+import by.fixprice.ui.pages.catalog.CatalogPage;
+import by.fixprice.ui.pages.catalog.CatalogPageXpath;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
@@ -14,6 +14,7 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 import java.util.Random;
+import java.util.function.Function;
 
 public class HomePage {
     private WebDriver driver;
@@ -35,19 +36,27 @@ public class HomePage {
         return new CatalogPage();
     }
 
-    public HomePage clickHeaderShopAddress() {
-        logger.info("Click header shop address");
+    public <T> T performActionOnElement(By locator, Function<WebElement, T> action) {
+        logger.info("Performing action on element with locator: " + locator);
         int maxRetries = 2;
         for (int i = 0; i < maxRetries; i++) {
-            logger.info("Trying to click header shop address " + i);
+            logger.info("Attempt " + i + " to perform action on element");
             try {
-                driver.findElement(By.xpath(HomePageXpath.BUTTON_HEADER_SHOP_XPATH)).click();
-                break;
+                WebElement element = driver.findElement(locator);
+                return action.apply(element);
             } catch (StaleElementReferenceException e) {
                 if (i == maxRetries - 1) throw e;
             }
         }
-        return this;
+        return null;
+    }
+
+
+    public HomePage clickHeaderShopAddress() {
+        logger.info("Click header shop address");
+        return performActionOnElement(By.xpath(HomePageXpath.BUTTON_HEADER_SHOP_XPATH), webElement -> {webElement.click();
+            return this;
+        });
     }
 
     public HomePage clickTownForDelivery() {
@@ -81,7 +90,7 @@ public class HomePage {
     }
 
     public String getSelectedShopAddressText() {
-        logger.info("Get selected shop address text: {}", driver.findElement(By.xpath(HomePageXpath.SELECT_TARGET_TOWN_XPATH)).getText());
+        logger.info("Get selected shop address text: {}", driver.findElement(By.xpath(HomePageXpath.OUTPUT_SHOP_ORDER_ADDRESS_XPATH)).getText());
         return driver.findElement(By.xpath(HomePageXpath.OUTPUT_SHOP_ORDER_ADDRESS_XPATH)).getText();
     }
 
