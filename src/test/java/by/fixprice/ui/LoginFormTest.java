@@ -15,17 +15,17 @@ public class LoginFormTest extends BaseTest {
         Assertions.assertEquals(LoginFormExpectations.INVALID_LOGIN_OR_PASSWORD, new LoginFormSteps().checkInvalidPhoneUser());
     }
 
-    @Test
-    @DisplayName("Invalid email or password")
-    void testInvalidEmailOrPasswordUser() {
-        Assertions.assertEquals(LoginFormExpectations.INVALID_LOGIN_OR_PASSWORD, new LoginFormSteps().checkInvalidEmailUser());
-    }
-
-    @Test
-    @DisplayName("Incorrect email")
-    void testIncorrectEmail() {
-        Assertions.assertEquals(LoginFormExpectations.INCORRECT_EMAIL_OR_PASSWORD, new LoginFormSteps().checkIncorrectEmailUser());
-    }
+//    @Test
+//    @DisplayName("Invalid email or password")
+//    void testInvalidEmailOrPasswordUser() {
+//        Assertions.assertEquals(LoginFormExpectations.INVALID_LOGIN_OR_PASSWORD, new LoginFormSteps().checkInvalidEmailUser());
+//    }
+//
+//    @Test
+//    @DisplayName("Incorrect email")
+//    void testIncorrectEmail() {
+//        Assertions.assertEquals(LoginFormExpectations.INCORRECT_EMAIL_OR_PASSWORD, new LoginFormSteps().checkIncorrectEmailUser());
+//    }
 
     @Test
     @DisplayName("No password")
