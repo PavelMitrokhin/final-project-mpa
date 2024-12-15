@@ -81,7 +81,7 @@ public class HomePage {
     }
 
     public String getSelectedShopAddressText() {
-        logger.info("Get selected shop address text");
+        logger.info("Get selected shop address text: {}", driver.findElement(By.xpath(HomePageXpath.SELECT_TARGET_TOWN_XPATH)).getText());
         return driver.findElement(By.xpath(HomePageXpath.OUTPUT_SHOP_ORDER_ADDRESS_XPATH)).getText();
     }
 
@@ -98,7 +98,7 @@ public class HomePage {
     }
 
     public String getCartBadgeCounter() {
-        logger.info("Get cart badge counter");
+        logger.info("Get cart badge counter: {}", driver.findElement(By.xpath(CatalogPageXpath.CART_BADGE_COUNTER_XPATH)).getText());
         return driver.findElement(By.xpath(CatalogPageXpath.CART_BADGE_COUNTER_XPATH)).getText();
     }
 
@@ -113,7 +113,7 @@ public class HomePage {
         int randomIndex = new Random().nextInt(addresses.size());
         WebElement selectRandomAddress = addresses.get(randomIndex);
         selectRandomAddress.click();
-        logger.info("address {}", selectRandomAddress.getText());
+        logger.info("address: {}", selectRandomAddress.getText());
 
         return this;
     }
