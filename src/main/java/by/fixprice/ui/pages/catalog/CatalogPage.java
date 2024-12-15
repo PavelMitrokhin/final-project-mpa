@@ -6,8 +6,6 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import java.time.Duration;
-
 public class CatalogPage {
     private WebDriver driver;
     private static final Logger logger = LogManager.getLogger();
