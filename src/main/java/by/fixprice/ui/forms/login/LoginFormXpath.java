@@ -26,5 +26,4 @@ public class LoginFormXpath {
     public static final String ENTER_PHONE_TEXT_XPATH = "//p[@class='phone-title'][contains(text(),'Укажите Ваш номер телефона')]";
     public static final String SMS_HELP_TITLE_XPATH = "//h3[@class='heading']";
     public static final String LOGIN_TITLE_XPATH = "//h1[@class='form-title']";
-
 }
