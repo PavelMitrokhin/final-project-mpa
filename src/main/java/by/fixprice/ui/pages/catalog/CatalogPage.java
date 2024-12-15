@@ -6,6 +6,8 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import java.time.Duration;
+
 public class CatalogPage {
     private WebDriver driver;
     private static final Logger logger = LogManager.getLogger();
@@ -13,6 +15,11 @@ public class CatalogPage {
 
     public CatalogPage() {
         driver = Driver.getDriver();
+    }
+
+    public CatalogPage declineCookies() {
+        driver.findElement(By.xpath(CatalogPageXpath.BUTTON_DECLINE_ALL_COOKIES_XPATH)).click();
+        return this;
     }
 
     public CatalogPage addFirstGoodFromChemicals() {
