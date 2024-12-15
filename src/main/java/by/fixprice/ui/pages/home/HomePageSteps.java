@@ -14,6 +14,16 @@ public class HomePageSteps {
         return homePage.getSelectedShopAddressText();
     }
 
+    public HomePageSteps selectRandomAddress() {
+        homePage.clickHeaderShopAddress()
+                .clickTownForDelivery()
+                .sendTownForDelivery("Брест")
+                .clickFoundTown()
+                .clickMoskovskayaShop()
+                .clickConfirmShop();
+        return this;
+    }
+  
     public String getAnySelectedShopAddress() {
         homePage.clickHeaderShopAddress()
                 .clickTownForDelivery()
