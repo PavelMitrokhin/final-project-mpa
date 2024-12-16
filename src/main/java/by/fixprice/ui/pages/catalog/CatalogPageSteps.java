@@ -14,9 +14,9 @@ public class CatalogPageSteps {
         return homePage.getCartBadgeCounter();
     }
 
-    public String getFirstChemicalCatalog() {
+    public String getFirstChemicalGoodNameInCatalog() {
+        catalogPage.declineCookies();
         homePage.openHouseholdChemicalsTab()
-                .declineCookies()
                 .addFirstGoodFromChemicals();
         homePage.closeForm();
         return catalogPage.getFirstChemicalGoodName();
