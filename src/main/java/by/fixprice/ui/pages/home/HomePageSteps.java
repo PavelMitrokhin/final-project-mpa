@@ -23,7 +23,7 @@ public class HomePageSteps {
                 .clickConfirmShop();
         return this;
     }
-
+  
     public String getAnySelectedShopAddress() {
         homePage.clickHeaderShopAddress()
                 .clickTownForDelivery()
