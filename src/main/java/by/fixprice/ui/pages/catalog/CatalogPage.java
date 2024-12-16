@@ -1,10 +1,13 @@
 package by.fixprice.ui.pages.catalog;
 
 import by.fixprice.ui.driver.Driver;
+import by.fixprice.ui.pages.home.HomePage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+
+import java.time.Duration;
 
 public class CatalogPage {
     private WebDriver driver;
@@ -17,8 +20,10 @@ public class CatalogPage {
 
     public CatalogPage declineCookies() {
         logger.info("Declining cookies");
-        driver.findElement(By.xpath(CatalogPageXpath.BUTTON_DECLINE_ALL_COOKIES_XPATH)).click();
-        return this;
+        return new HomePage().performActionOnElement(By.xpath(CatalogPageXpath.BUTTON_DECLINE_ALL_COOKIES_XPATH), webElement -> {
+                    webElement.click();
+                    return new CatalogPage();
+                });
     }
 
     public CatalogPage addFirstGoodFromChemicals() {
