@@ -13,7 +13,6 @@ public class CatalogPageSteps {
         homePage.closeForm();
         return homePage.getCartBadgeCounter();
     }
-
     public String getFirstChemicalGoodNameInCatalog() {
         catalogPage.declineCookies();
         homePage.openHouseholdChemicalsTab()
