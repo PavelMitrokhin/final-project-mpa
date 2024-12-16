@@ -1,5 +1,6 @@
 package by.fixprice.ui;
 
+import by.fixprice.ui.pages.cart.CartPageSteps;
 import by.fixprice.ui.pages.catalog.CatalogPageSteps;
 import by.fixprice.ui.pages.home.HomePageSteps;
 import org.junit.jupiter.api.Assertions;
@@ -17,5 +18,17 @@ public class CartPageTest extends BaseTest {
     @DisplayName("Test cart badge counter")
     void testCartBadgeCounter() {
         Assertions.assertEquals("1", new CatalogPageSteps().getCartBadgeCounterText());
+    }
+
+    @Test
+    @DisplayName("Test total amount of goods in cart")
+    void testTotalAmountOfGoodsInCart() {
+        Assertions.assertEquals("1 шт.", new CartPageSteps().getTotalAmountOfGoods());
+    }
+
+    @Test
+    @DisplayName("Test the first chemical good added to cart from catalog")
+    void testFirstChemicalGoodAddedToCart() {
+        Assertions.assertEquals(new CatalogPageSteps().getFirstChemicalGoodNameInCatalog(), new CartPageSteps().getFirstAddedGoodNameInCart());
     }
 }
