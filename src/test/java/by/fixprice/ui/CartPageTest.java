@@ -25,4 +25,10 @@ public class CartPageTest extends BaseTest {
     void testTotalAmountOfGoodsInCart() {
         Assertions.assertEquals("1 шт.", new CartPageSteps().getTotalAmountOfGoods());
     }
+
+    @Test
+    @DisplayName("Test the first chemical good added to cart from catalog")
+    void testFirstChemicalGoodAddedToCart() {
+        Assertions.assertEquals(new CatalogPageSteps().getFirstChemicalGoodNameInCatalog(), new CartPageSteps().getFirstAddedGoodNameInCart());
+    }
 }
