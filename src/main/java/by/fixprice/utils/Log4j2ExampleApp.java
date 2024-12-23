@@ -1,4 +1,4 @@
-package by.fixprice;
+package by.fixprice.utils;
 
 import java.io.IOException;
 import java.nio.file.Files;
