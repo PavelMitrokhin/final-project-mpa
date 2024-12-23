@@ -36,20 +36,6 @@ public class LoginRequest {
                 .build();
     }
 
-    public ValidatableResponse getResponseForRequestedData(String password, String email, String phone) {
-        ValidatableResponse response = given()
-                .spec(LoginRequest.requestSpecification)
-                .body("{\n" +
-                        "    \"password\":" + password + ",\n" +
-                        "    \"email\":" + email + ",\n" +
-                        "    \"phone\":" + phone + "\n" +
-                        "}")
-                .when()
-                .post()
-                .then();
-        return response;
-    }
-
     public ValidatableResponse getResponseForRequestedData(User user) {
         logger.info("User = password: {}, email: {}, phone: {}", user.getPassword(), user.getEmail(), user.getPhone());
         ValidatableResponse response = given()
