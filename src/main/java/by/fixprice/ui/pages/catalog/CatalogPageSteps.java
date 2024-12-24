@@ -7,8 +7,8 @@ public class CatalogPageSteps {
     CatalogPage catalogPage = new CatalogPage();
 
     public String getCartBadgeCounterText() {
+        catalogPage.declineCookies();
         homePage.openHouseholdChemicalsTab()
-                .declineCookies()
                 .addFirstGoodFromChemicals();
         homePage.closeForm();
         return homePage.getCartBadgeCounter();

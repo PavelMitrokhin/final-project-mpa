@@ -9,8 +9,8 @@ public class CartPageSteps {
     CatalogPage catalogPage = new CatalogPage();
 
     public String getTotalAmountOfGoods() {
+        catalogPage.declineCookies();
         homePage.openHouseholdChemicalsTab()
-                .declineCookies()
                 .addFirstGoodFromChemicals();
         homePage.closeForm()
                 .clickCart();
