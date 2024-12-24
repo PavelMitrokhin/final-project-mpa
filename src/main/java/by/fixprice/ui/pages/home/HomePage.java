@@ -66,8 +66,13 @@ public class HomePage {
         WebElement element = driver.findElement(By.xpath(HomePageXpath.BUTTON_SELECT_TOWN_XPATH));
 
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
-        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
-
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(HomePageXpath.BUTTON_SELECT_TOWN_XPATH)));
+        if (element.isDisplayed()) {
+            element.click();
+        } else {
+            System.out.println("Element is not displayed");
+        }
         return this;
     }
 
