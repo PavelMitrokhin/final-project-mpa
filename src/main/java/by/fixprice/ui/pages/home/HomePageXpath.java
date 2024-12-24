@@ -12,4 +12,5 @@ public class HomePageXpath {
     public static final String BUTTON_HEADER_SHOP_XPATH = "//div[@class='header-obtain-method']";
     public static final String OUTPUT_SHOP_ORDER_ADDRESS_XPATH = "//div[@class='row']//div[@class='title']";
     public static final String BUTTON_CLOSE_FORM_XPATH = "//button[@class='close'][@data-test='close-button']";
+    public static final String BUTTON_CONFIRM_MY_TOWN_XPATH = "//*[@id=\"app-header\"]/header/div/div/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/button[1]";
 }
