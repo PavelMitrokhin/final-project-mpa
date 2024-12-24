@@ -62,6 +62,7 @@ public class HomePage {
         logger.info("Click town for delivery");
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);",
         driver.findElement(By.xpath(HomePageXpath.BUTTON_SELECT_TOWN_XPATH)));
+        driver.findElement(By.xpath(HomePageXpath.BUTTON_SELECT_TOWN_XPATH)).click();
         return this;
     }
 
