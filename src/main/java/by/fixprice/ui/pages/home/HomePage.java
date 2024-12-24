@@ -78,6 +78,7 @@ public class HomePage {
         logger.info("Type to find town for delivery: " + town);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(HomePageXpath.INPUT_SEARCH_TOWN_XPATH)));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
         element.sendKeys(town);
 
         return this;
