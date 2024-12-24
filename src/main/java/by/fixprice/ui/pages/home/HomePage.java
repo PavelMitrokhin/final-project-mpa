@@ -63,12 +63,11 @@ public class HomePage {
 
     public HomePage clickTownForDelivery() {
         logger.info("Click town for delivery");
+        WebElement element = driver.findElement(By.xpath(HomePageXpath.BUTTON_SELECT_TOWN_XPATH));
 
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);",
-        driver.findElement(By.xpath(HomePageXpath.BUTTON_SELECT_TOWN_XPATH)));
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath(HomePageXpath.BUTTON_SELECT_TOWN_XPATH))));
-        driver.findElement(By.xpath(HomePageXpath.BUTTON_SELECT_TOWN_XPATH)).click();
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
+
         return this;
     }
 
