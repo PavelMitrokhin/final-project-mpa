@@ -7,10 +7,7 @@ import by.fixprice.ui.pages.catalog.CatalogPage;
 import by.fixprice.ui.pages.catalog.CatalogPageXpath;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.openqa.selenium.By;
-import org.openqa.selenium.StaleElementReferenceException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 
 import java.util.List;
 import java.util.Random;
@@ -63,7 +60,8 @@ public class HomePage {
 
     public HomePage clickTownForDelivery() {
         logger.info("Click town for delivery");
-        driver.findElement(By.xpath(HomePageXpath.BUTTON_SELECT_TOWN_XPATH)).click();
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);",
+        driver.findElement(By.xpath(HomePageXpath.BUTTON_SELECT_TOWN_XPATH)));
         return this;
     }
 
