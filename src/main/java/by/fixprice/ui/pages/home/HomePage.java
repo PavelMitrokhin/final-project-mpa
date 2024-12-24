@@ -67,7 +67,7 @@ public class HomePage {
 
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(HomePageXpath.BUTTON_SELECT_TOWN_XPATH)));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(HomePageXpath.BUTTON_SELECT_TOWN_XPATH)));
         if (element.isDisplayed()) {
             element.click();
         } else {
