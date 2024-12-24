@@ -7,8 +7,6 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.Objects;
 
-import static io.restassured.RestAssured.given;
-
 public class LoginFormSteps {
     HomePage homePage = new HomePage();
     LoginForm loginForm = new LoginForm();
@@ -16,7 +14,8 @@ public class LoginFormSteps {
     private static final Logger logger = LogManager.getLogger();
 
     public String checkInvalidPhoneUser() {
-        homePage.openLoginForm()
+        homePage.clickConfirmTown()
+                .openLoginForm()
                 .sendPhone(user.getPhoneAndPasswordUser())
                 .sendPassword(user.getPhoneAndPasswordUser())
                 .clickAgreementCheckbox()
@@ -25,7 +24,8 @@ public class LoginFormSteps {
     }
 
     public String checkInvalidEmailUser() {
-        homePage.openLoginForm()
+        homePage.clickConfirmTown()
+                .openLoginForm()
                 .selectEmailTab()
                 .sendEmail(user.getEmailAndPasswordUser())
                 .sendPassword(user.getEmailAndPasswordUser())
@@ -35,7 +35,8 @@ public class LoginFormSteps {
     }
 
     public String checkIncorrectEmailUser() {
-        homePage.openLoginForm()
+        homePage.clickConfirmTown()
+                .openLoginForm()
                 .selectEmailTab()
                 .sendEmail(user.getIncorrectEmailUser())
                 .sendPassword(user.getIncorrectEmailUser())
@@ -45,7 +46,8 @@ public class LoginFormSteps {
     }
 
     public String checkEmptyPassword() {
-        homePage.openLoginForm()
+        homePage.clickConfirmTown()
+                .openLoginForm()
                 .sendPhone(user.getPhoneAndPasswordUser())
                 .clickAgreementCheckbox()
                 .clickEnterLoginForm();
@@ -53,7 +55,8 @@ public class LoginFormSteps {
     }
 
     public String checkRegisterCodeSent() {
-        homePage.openLoginForm()
+        homePage.clickConfirmTown()
+                .openLoginForm()
                 .clickRegisterButton()
                 .sendPhone(user.getPhoneAndPasswordUser())
                 .clickAgreementCheckbox()
@@ -62,7 +65,8 @@ public class LoginFormSteps {
     }
 
     public String checkChangeRegisterPhone() {
-        homePage.openLoginForm()
+        homePage.clickConfirmTown()
+                .openLoginForm()
                 .clickRegisterButton()
                 .sendPhone(user.getPhoneAndPasswordUser())
                 .clickAgreementCheckbox()
@@ -72,7 +76,8 @@ public class LoginFormSteps {
     }
 
     public String noPhoneToRegister() {
-        homePage.openLoginForm()
+        homePage.clickConfirmTown()
+                .openLoginForm()
                 .clickRegisterButton()
                 .clickAgreementCheckbox()
                 .clickContinueRegisterButton();
@@ -80,7 +85,8 @@ public class LoginFormSteps {
     }
 
     public boolean checkCodeResend() {
-        homePage.openLoginForm()
+        homePage.clickConfirmTown()
+                .openLoginForm()
                 .clickRegisterButton()
                 .sendPhone(user.getPhoneAndPasswordUser())
                 .clickAgreementCheckbox()
@@ -90,14 +96,16 @@ public class LoginFormSteps {
     }
 
     public String backFromRegisterToLogin() {
-        homePage.openLoginForm()
+        homePage.clickConfirmTown()
+                .openLoginForm()
                 .clickRegisterButton()
                 .backToLogin();
         return loginForm.getLoginTitle();
     }
 
     public String checkSmsHelpPopup() {
-        homePage.openLoginForm()
+        homePage.clickConfirmTown()
+                .openLoginForm()
                 .clickRegisterButton()
                 .sendPhone(user.getPhoneAndPasswordUser())
                 .clickAgreementCheckbox()
@@ -107,7 +115,8 @@ public class LoginFormSteps {
     }
 
     public String checkInvalidRestoreEmail() {
-        homePage.openLoginForm()
+        homePage.clickConfirmTown()
+                .openLoginForm()
                 .clickForgotPassword()
                 .sendRestoreEmail(user.getEmailAndPasswordUser())
                 .clickGetLinkByEmail();
@@ -116,7 +125,8 @@ public class LoginFormSteps {
 
     public boolean hasFiveTriesToRestore() {
         boolean hasFiveRequestsResponse = false;
-        homePage.openLoginForm()
+        homePage.clickConfirmTown()
+                .openLoginForm()
                 .clickForgotPassword()
                 .sendRestoreEmail(user.getEmailAndPasswordUser());
 
@@ -135,7 +145,8 @@ public class LoginFormSteps {
     }
 
     public String checkInvalidRestorePhone() {
-        homePage.openLoginForm()
+        homePage.clickConfirmTown()
+                .openLoginForm()
                 .clickForgotPassword()
                 .restoreByPhone()
                 .sendPhone(user.getPhoneAndPasswordUser())
@@ -145,14 +156,16 @@ public class LoginFormSteps {
     }
 
     public String checkTabInLogin() {
-        homePage.openLoginForm()
+        homePage.clickConfirmTown()
+                .openLoginForm()
                 .selectEmailTab()
                 .selectPhoneTab();
         return loginForm.getAttribute(LoginFormXpath.BUTTON_PHONE_TAB_XPATH, "class");
     }
 
     public String checkShowPassword() {
-        homePage.openLoginForm()
+        homePage.clickConfirmTown()
+                .openLoginForm()
                 .clickShowPassword();
         return loginForm.getAttribute(LoginFormXpath.INPUT_PASSWORD_XPATH, "type");
     }

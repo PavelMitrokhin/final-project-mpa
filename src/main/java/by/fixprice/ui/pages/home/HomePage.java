@@ -128,4 +128,10 @@ public class HomePage {
 
         return this;
     }
+
+    public HomePage clickConfirmTown() {
+        logger.info("Click confirm town");
+        driver.findElement(By.xpath(HomePageXpath.BUTTON_CONFIRM_MY_TOWN_XPATH)).click();
+        return this;
+    }
 }

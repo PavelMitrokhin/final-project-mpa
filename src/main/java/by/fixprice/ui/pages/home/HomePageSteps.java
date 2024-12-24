@@ -4,7 +4,8 @@ public class HomePageSteps {
     HomePage homePage = new HomePage();
 
     public String getSetupMoskovskayaAddressShop() {
-        homePage.clickHeaderShopAddress()
+        homePage.clickConfirmTown()
+                .clickHeaderShopAddress()
                 .clickTownForDelivery()
                 .sendTownForDelivery("Брест")
                 .clickFoundTown()
@@ -15,7 +16,8 @@ public class HomePageSteps {
     }
 
     public HomePageSteps selectRandomAddress() {
-        homePage.clickHeaderShopAddress()
+        homePage.clickConfirmTown()
+                .clickHeaderShopAddress()
                 .clickTownForDelivery()
                 .sendTownForDelivery("Брест")
                 .clickFoundTown()
@@ -25,7 +27,8 @@ public class HomePageSteps {
     }
   
     public String getAnySelectedShopAddress() {
-        homePage.clickHeaderShopAddress()
+        homePage.clickConfirmTown()
+                .clickHeaderShopAddress()
                 .clickTownForDelivery()
                 .sendTownForDelivery("Брест")
                 .clickFoundTown()
