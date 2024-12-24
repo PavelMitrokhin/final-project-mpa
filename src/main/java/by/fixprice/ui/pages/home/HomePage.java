@@ -78,11 +78,10 @@ public class HomePage {
         logger.info("Type to find town for delivery: " + town);
         WebElement element = driver.findElement(By.xpath(HomePageXpath.INPUT_SEARCH_TOWN_XPATH));
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
-        if (element.isDisplayed()) {
-            element.sendKeys(town);
-        } else {
-            System.out.println("Element is not displayed");
-        }
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(driver -> ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete"));
+        element.sendKeys(town);
+
         return this;
     }
 
