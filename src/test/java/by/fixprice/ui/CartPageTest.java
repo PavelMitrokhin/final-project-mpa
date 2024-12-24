@@ -2,6 +2,7 @@ package by.fixprice.ui;
 
 import by.fixprice.ui.pages.cart.CartPageSteps;
 import by.fixprice.ui.pages.catalog.CatalogPageSteps;
+import by.fixprice.ui.pages.home.HomePage;
 import by.fixprice.ui.pages.home.HomePageSteps;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -11,7 +12,13 @@ import org.junit.jupiter.api.Test;
 public class CartPageTest extends BaseTest {
     @BeforeEach
     public void setUpCartPage() {
-        new HomePageSteps().selectRandomAddress();
+        new HomePage().clickConfirmTown()
+                .clickHeaderShopAddress()
+                .clickTownForDelivery()
+                .sendTownForDelivery("Брест")
+                .clickFoundTown()
+                .clickMoskovskayaShop()
+                .clickConfirmShop();
     }
 
     @Test
