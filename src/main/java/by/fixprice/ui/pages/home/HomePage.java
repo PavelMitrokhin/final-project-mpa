@@ -134,10 +134,4 @@ public class HomePage {
         driver.findElement(By.xpath(HomePageXpath.BUTTON_CONFIRM_MY_TOWN_XPATH)).click();
         return this;
     }
-
-    public HomePage clickCloseHedgehog() {
-        logger.info("close hedgehog helper");
-        driver.findElement(By.xpath(HomePageXpath.BUTTON_CLOSE_HEDGEHOG_XPATH)).click();
-        return this;
-    }
 }

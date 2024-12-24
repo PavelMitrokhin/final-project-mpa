@@ -5,7 +5,6 @@ public class HomePageSteps {
 
     public String getSetupMoskovskayaAddressShop() {
         homePage.clickConfirmTown()
-                .clickCloseHedgehog()
                 .clickHeaderShopAddress()
                 .clickTownForDelivery()
                 .sendTownForDelivery("Брест")
@@ -18,7 +17,6 @@ public class HomePageSteps {
 
     public HomePageSteps selectRandomAddress() {
         homePage.clickConfirmTown()
-                .clickCloseHedgehog()
                 .clickHeaderShopAddress()
                 .clickTownForDelivery()
                 .sendTownForDelivery("Брест")
@@ -30,7 +28,6 @@ public class HomePageSteps {
   
     public String getAnySelectedShopAddress() {
         homePage.clickConfirmTown()
-                .clickCloseHedgehog()
                 .clickHeaderShopAddress()
                 .clickTownForDelivery()
                 .sendTownForDelivery("Брест")
