@@ -8,7 +8,10 @@ import by.fixprice.ui.pages.catalog.CatalogPageXpath;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.List;
 import java.util.Random;
 import java.util.function.Function;
@@ -60,8 +63,11 @@ public class HomePage {
 
     public HomePage clickTownForDelivery() {
         logger.info("Click town for delivery");
+
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);",
         driver.findElement(By.xpath(HomePageXpath.BUTTON_SELECT_TOWN_XPATH)));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath(HomePageXpath.BUTTON_SELECT_TOWN_XPATH))));
         driver.findElement(By.xpath(HomePageXpath.BUTTON_SELECT_TOWN_XPATH)).click();
         return this;
     }
