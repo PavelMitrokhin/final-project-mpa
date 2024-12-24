@@ -76,7 +76,13 @@ public class HomePage {
 
     public HomePage sendTownForDelivery(String town) {
         logger.info("Type to find town for delivery: " + town);
-        driver.findElement(By.xpath(HomePageXpath.INPUT_SEARCH_TOWN_XPATH)).sendKeys(town);
+        WebElement element = driver.findElement(By.xpath(HomePageXpath.INPUT_SEARCH_TOWN_XPATH));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+        if (element.isDisplayed()) {
+            element.sendKeys(town);
+        } else {
+            System.out.println("Element is not displayed");
+        }
         return this;
     }
 
