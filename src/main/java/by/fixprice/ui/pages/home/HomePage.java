@@ -78,7 +78,7 @@ public class HomePage {
         logger.info("Type to find town for delivery: " + town);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(HomePageXpath.INPUT_SEARCH_TOWN_XPATH)));
-        element.click();
+        element.sendKeys(town);
 
         return this;
     }
