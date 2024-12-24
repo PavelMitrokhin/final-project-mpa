@@ -13,6 +13,7 @@ public class CartPageTest extends BaseTest {
     @BeforeEach
     public void setUpCartPage() {
         new HomePage().clickConfirmTown()
+                .clickCloseHedgehog()
                 .clickHeaderShopAddress()
                 .clickTownForDelivery()
                 .sendTownForDelivery("Брест")
