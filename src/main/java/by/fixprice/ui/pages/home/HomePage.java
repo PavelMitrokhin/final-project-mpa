@@ -78,17 +78,17 @@ public class HomePage {
     public HomePage sendTownForDelivery(String town) {
         logger.info("Type to find town for delivery: " + town);
         WebElement element = driver.findElement(By.xpath(HomePageXpath.INPUT_SEARCH_TOWN_XPATH));
-        Actions actions = new Actions(driver);
-        actions.moveToElement(element).click().perform();
-        element.sendKeys(town);
-//        for (int i = 0; i < 10; i++) {
-//            try {
-//                element.sendKeys(town);
-//                break;
-//            } catch (StaleElementReferenceException | NoSuchElementException e) {
-//                if (i == 10 - 1) throw e;
-//            }
-//        }
+//        Actions actions = new Actions(driver);
+//        actions.moveToElement(element).click().perform();
+//        element.sendKeys(town);
+        for (int i = 0; i < 10; i++) {
+            try {
+                element.sendKeys(town);
+                break;
+            } catch (StaleElementReferenceException | NoSuchElementException e) {
+                if (i == 10 - 1) throw e;
+            }
+        }
         return this;
     }
 
