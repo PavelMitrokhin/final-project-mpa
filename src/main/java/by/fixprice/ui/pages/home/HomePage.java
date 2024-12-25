@@ -76,10 +76,19 @@ public class HomePage {
 
     public HomePage sendTownForDelivery(String town) {
         logger.info("Type to find town for delivery: " + town);
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(HomePageXpath.INPUT_SEARCH_TOWN_XPATH)));
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
-        element.sendKeys(town);
+        WebElement element = driver.findElement(By.xpath(HomePageXpath.INPUT_SEARCH_TOWN_XPATH));
+        for (int i = 0; i < 10; i++) {
+            try {
+                element.sendKeys(town);
+                break;
+            } catch (StaleElementReferenceException | NoSuchElementException e) {
+                if (i == 10 - 1) throw e;
+            }
+        }
+//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+//        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(HomePageXpath.INPUT_SEARCH_TOWN_XPATH)));
+//        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+//        element.sendKeys(town);
 
         return this;
     }
