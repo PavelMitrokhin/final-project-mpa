@@ -1,7 +1,7 @@
 This project is designed for automated website testing, including UI testing using Selenium and API testing using RestAssured.
 
 Tecnology:
-- program languade: Java;
+- program language: Java;
 - UI testing tools: Selenium;
 - API testing tools: RestAssured;
 - test framework: JUnit;
