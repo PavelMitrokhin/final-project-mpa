@@ -85,11 +85,6 @@ public class HomePage {
                 if (i == 10 - 1) throw e;
             }
         }
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        WebElement element1 = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(HomePageXpath.INPUT_SEARCH_TOWN_XPATH)));
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element1);
-        element.sendKeys(town);
-
         return this;
     }
 
