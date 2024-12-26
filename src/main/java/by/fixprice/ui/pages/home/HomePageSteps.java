@@ -21,7 +21,7 @@ public class HomePageSteps {
                 .clickTownForDelivery()
                 .sendTownForDelivery("Брест")
                 .clickFoundTown()
-                .clickMoskovskayaShop()
+                .clickRandomAddress()
                 .clickConfirmShop();
         return this;
     }
